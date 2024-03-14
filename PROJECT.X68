@@ -8,6 +8,23 @@
 START:                ; first instruction of program
   
   * Put program code here
+
+*-------------------------------------------------------------------
+*
+*           adjusting window size
+*
+*-------------------------------------------------------------------
+  MOVE.B #33, D0
+  MOVE.L #(600<<16+550), D1 ; setup window size
+  TRAP #15
+  
+*-------------------------------------------------------------------
+*
+*           ENABLE MOUSE 
+*
+*-------------------------------------------------------------------
+       MOVE.B #60, D0
+       TRAP #15
   
 *-------------------------------------------------------------------
 *
@@ -15,9 +32,42 @@ START:                ; first instruction of program
 *
 *-------------------------------------------------------------------
 
-LOOP   
+GAME_LOOP 
+       BSR UPDATE
        BSR RENDER
-       BRA LOOP
+    
+       BRA GAME_LOOP
+       
+       
+*-------------------------------------------------------------------
+*
+*           UPDATE
+*
+*-------------------------------------------------------------------
+UPDATE
+            BSR GET_MOUSE
+            RTS
+            
+            
+            
+*-------------------------------------------------------------------
+*
+*           get mouse
+*
+*-------------------------------------------------------------------
+GET_MOUSE
+            MOVEQ #61, D0
+            MOVE.B #0, D1
+            TRAP #15
+            
+           
+            
+            MOVE.L D1,D3
+            AND.L #$0000FFFF,D1
+            MOVE.B #6,D2
+            MOVE.B #20,D0
+            TRAP #15
+            RTS
   
 *-------------------------------------------------------------------
 *
@@ -30,9 +80,65 @@ RENDER
     TRAP    #15
     
     BSR DRAW_OUTPUT_FIELD
+    
+    ; first line of buttons
+    MOVE #0,D6
+    MOVE #0,D7
     BSR DRAW_BUTTON
+    MOVE #160,D6
+    MOVE #0,D7
+    BSR DRAW_BUTTON
+    MOVE #320,D6
+    MOVE #0,D7
+    BSR DRAW_BUTTON
+    MOVE #480,D6
+    MOVE #0,D7
+    BSR DRAW_BUTTON
+    
+    ; SECOND LINE OF BUTTONS
+    MOVE #0,D6
+    MOVE #100,D7
+    BSR DRAW_BUTTON
+    MOVE #160,D6
+    MOVE #100,D7
+    BSR DRAW_BUTTON
+    MOVE #320,D6
+    MOVE #100,D7
+    BSR DRAW_BUTTON
+    MOVE #480,D6
+    MOVE #100,D7
+    BSR DRAW_BUTTON
+    
+    ; THIRD LINE OF BUTTONS
+    MOVE #0,D6
+    MOVE #200,D7
+    BSR DRAW_BUTTON
+    MOVE #160,D6
+    MOVE #200,D7
+    BSR DRAW_BUTTON
+    MOVE #320,D6
+    MOVE #200,D7
+    BSR DRAW_BUTTON
+    MOVE #480,D6
+    MOVE #200,D7
+    BSR DRAW_BUTTON
+    
+    ; FOURTH LINE OF BUTTONS
+    MOVE #0,D6
+    MOVE #300,D7
+    BSR DRAW_BUTTON
+    MOVE #160,D6
+    MOVE #300,D7
+    BSR DRAW_BUTTON
+    MOVE #320,D6
+    MOVE #300,D7
+    BSR DRAW_BUTTON
+    MOVE #480,D6
+    MOVE #300,D7
+    BSR DRAW_BUTTON
+    
     RTS
- 
+    
  
 DRAW_OUTPUT_FIELD
     ; SET PEN STYLE
@@ -62,13 +168,16 @@ DRAW_BUTTON
     TRAP    #15                     ; Trap (Perform action)
   
    ; Set X, Y, Width and Height
-   MOVE.L  #BUTTON_POS_X,   D1      ; X START POS
-   MOVE.L  #BUTTON_POS_Y,   D2      ; Y START POS
-    
-   MOVE.L  #BUTTON_POS_X,   D3
-   ADD.L   #BUTTON_WIDTH,   D3      ; Width  (STARTPOSX + WIDTH)
-   MOVE.L  #BUTTON_POS_Y,   D4 
-   ADD.L   #BUTTON_HEIGHT,  D4     ; Height (STARTPOSY + HEIGHT)
+   MOVE.L D6, D1
+   MOVE.L D7, D2
+   ADD.L   #BUTTON1_POS_X,   D1      ; X START POS
+   ADD.L   #BUTTON1_POS_Y,   D2      ; Y START POS
+   
+   MOVE.L  D1,   D3
+   
+   ADD.L   #BUTTON1_WIDTH,   D3      ; Width  (STARTPOSX + WIDTH)
+   MOVE.L  D2,   D4 
+   ADD.L   #BUTTON1_HEIGHT,  D4     ; Height (STARTPOSY + HEIGHT)
      
    ; Draw FIELD
    MOVE.B  #PEN_DRAW,        D0    ; Draw queued pen
@@ -92,10 +201,15 @@ OUTPUT_POS_Y EQU 20
 OUTPUT_WIDTH EQU 600
 OUTPUT_HEIGHT EQU 80
 
-BUTTON_POS_X EQU 20
-BUTTON_POS_Y EQU 120
-BUTTON_WIDTH EQU 120
-BUTTON_HEIGHT EQU 80
+BUTTON1_POS_X EQU 20
+BUTTON1_POS_Y EQU 120
+BUTTON1_WIDTH EQU 120
+BUTTON1_HEIGHT EQU 80
+
+BUTTON2_POS_X EQU 160
+BUTTON2_POS_Y EQU 120
+BUTTON2_WIDTH EQU 120
+BUTTON2_HEIGHT EQU 80
 
 CR  EQU  $0D
 LF  EQU  $0A
