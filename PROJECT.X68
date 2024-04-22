@@ -56,7 +56,7 @@ UPDATE
 *
 *-------------------------------------------------------------------
 GET_MOUSE
-            MOVE.B #0000,D1
+            MOVE.L #0000,D1
             MOVE.B #11,D0
             TRAP #15
             MOVEQ #61, D0
@@ -64,19 +64,28 @@ GET_MOUSE
             TRAP #15 // take in the mouse coordinates
             
            * coords are stored as #YYYY XXXX
+           
+           
+           MOVE.L D1,D3
+           AND.L #$0000FFFF,D1
+           MOVE.B #4,D2
+           MOVE.B #20,D0
+           TRAP #15
             
-            MOVE.L D1,D3
-            AND.L #$0000FFFF,D1
-            MOVE.B #6,D2
-            MOVE.B #20,D0
-            TRAP #15
+           MOVE.L #0, D1
+           MOVE.L D3,D1
+           LSR.L #8,D1
+           LSR.L #8,D1
+          * LSR.L #8,D1
+          * AND.L #$0000FFFF,D1
+           MOVE.B #6,D2
+           MOVE.B #20,D0
+           TRAP #15
+
             
-            MOVE.B #0, D1
-            *MOVE.B D3,D1
-            *AND.L #$FFFF0000,D1
-            MOVE.B #6,D2
-            MOVE.B #20,D0
-            TRAP #15
+            
+            
+            
             RTS
   
 *-------------------------------------------------------------------
@@ -235,6 +244,7 @@ WHITE           EQU     $00FFFFFF ; A B G R (LEAST SIGNIFICANT)
 YELLOW           EQU     $0000FFFF ; A B G R (LEAST SIGNIFICANT)
 RED             EQU     $000000FF ; A B G R (LEAST SIGNIFICANT)
      END    START        ; last line of source
+
 
 
 
