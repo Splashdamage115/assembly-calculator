@@ -56,14 +56,24 @@ UPDATE
 *
 *-------------------------------------------------------------------
 GET_MOUSE
+            MOVE.B #0000,D1
+            MOVE.B #11,D0
+            TRAP #15
             MOVEQ #61, D0
             MOVE.B #0, D1
-            TRAP #15
+            TRAP #15 // take in the mouse coordinates
             
-           
+           * coords are stored as #YYYY XXXX
             
             MOVE.L D1,D3
             AND.L #$0000FFFF,D1
+            MOVE.B #6,D2
+            MOVE.B #20,D0
+            TRAP #15
+            
+            MOVE.B #0, D1
+            *MOVE.B D3,D1
+            *AND.L #$FFFF0000,D1
             MOVE.B #6,D2
             MOVE.B #20,D0
             TRAP #15
@@ -133,6 +143,7 @@ RENDER
     MOVE #320,D6
     MOVE #300,D7
     BSR DRAW_BUTTON
+    
     MOVE #480,D6
     MOVE #300,D7
     BSR DRAW_BUTTON
@@ -164,6 +175,12 @@ DRAW_OUTPUT_FIELD
 DRAW_BUTTON
     ; SET PEN STYLE
     MOVE.L  #WHITE,     D1          ; Set PEN color
+    CMP #1, D5
+    BNE NOT_YELLOW
+
+    MOVE.L  #YELLOW,     D1  
+    
+NOT_YELLOW
     MOVE.B  #NORMAL_PEN,     D0     ; SET PEN DRAW TYPE
     TRAP    #15                     ; Trap (Perform action)
   
@@ -215,8 +232,10 @@ CR  EQU  $0D
 LF  EQU  $0A
 MESSAGE DC.B 'Hello World',CR,LF,0
 WHITE           EQU     $00FFFFFF ; A B G R (LEAST SIGNIFICANT)
+YELLOW           EQU     $0000FFFF ; A B G R (LEAST SIGNIFICANT)
 RED             EQU     $000000FF ; A B G R (LEAST SIGNIFICANT)
      END    START        ; last line of source
+
 
 
 
