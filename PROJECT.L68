@@ -1,6 +1,6 @@
 00001000 Starting Address
 Assembler used: EASy68K Editor/Assembler v5.16.01
-Created On: 22/04/2024 15:05:51
+Created On: 22/04/2024 16:56:54
 
 00000000                             1  *-----------------------------------------------------------
 00000000                             2  * Title      : ASSEMBLY BASED CALCULATOR
@@ -38,7 +38,7 @@ Created On: 22/04/2024 15:05:51
 00001012                            34  
 00001012                            35  GAME_LOOP 
 00001012  6100 0008                 36         BSR UPDATE
-00001016  6100 0040                 37         BSR RENDER
+00001016  6100 0052                 37         BSR RENDER
 0000101A                            38      
 0000101A  60F6                      39         BRA GAME_LOOP
 0000101C                            40         
@@ -60,194 +60,411 @@ Created On: 22/04/2024 15:05:51
 00001022                            56  *
 00001022                            57  *-------------------------------------------------------------------
 00001022                            58  GET_MOUSE
-00001022  7200                      59              MOVE.L #0000,D1
-00001024  103C 000B                 60              MOVE.B #11,D0
-00001028  4E4F                      61              TRAP #15
-0000102A  703D                      62              MOVEQ #61, D0
-0000102C  123C 0000                 63              MOVE.B #0, D1
-00001030  4E4F                      64              TRAP #15 // take in the mouse coordinates
-00001032                            65              
-00001032                            66             * coords are stored as #YYYY XXXX
-00001032                            67             
-00001032                            68             
-00001032  2601                      69             MOVE.L D1,D3
-00001034  C2BC 0000FFFF             70             AND.L #$0000FFFF,D1
-0000103A  143C 0004                 71             MOVE.B #4,D2
-0000103E  103C 0014                 72             MOVE.B #20,D0
-00001042  4E4F                      73             TRAP #15
-00001044                            74              
-00001044  7200                      75             MOVE.L #0, D1
-00001046  2203                      76             MOVE.L D3,D1
-00001048  E089                      77             LSR.L #8,D1
-0000104A  E089                      78             LSR.L #8,D1
-0000104C                            79            * LSR.L #8,D1
-0000104C                            80            * AND.L #$0000FFFF,D1
-0000104C  143C 0006                 81             MOVE.B #6,D2
-00001050  103C 0014                 82             MOVE.B #20,D0
-00001054  4E4F                      83             TRAP #15
-00001056                            84  
-00001056                            85              
-00001056                            86              
-00001056                            87              
-00001056                            88              
-00001056  4E75                      89              RTS
-00001058                            90    
-00001058                            91  *-------------------------------------------------------------------
-00001058                            92  *
-00001058                            93  *           Render Loop
-00001058                            94  *
-00001058                            95  *-------------------------------------------------------------------
-00001058                            96  RENDER
-00001058                            97      ; enable back buffer
-00001058  103C 005E                 98      MOVE.B  #94,        D0
-0000105C  4E4F                      99      TRAP    #15
-0000105E                           100      
-0000105E  6100 00C4                101      BSR DRAW_OUTPUT_FIELD
-00001062                           102      
-00001062                           103      ; first line of buttons
-00001062  3C3C 0000                104      MOVE #0,D6
-00001066  3E3C 0000                105      MOVE #0,D7
-0000106A  6100 00F0                106      BSR DRAW_BUTTON
-0000106E  3C3C 00A0                107      MOVE #160,D6
-00001072  3E3C 0000                108      MOVE #0,D7
-00001076  6100 00E4                109      BSR DRAW_BUTTON
-0000107A  3C3C 0140                110      MOVE #320,D6
-0000107E  3E3C 0000                111      MOVE #0,D7
-00001082  6100 00D8                112      BSR DRAW_BUTTON
-00001086  3C3C 01E0                113      MOVE #480,D6
-0000108A  3E3C 0000                114      MOVE #0,D7
-0000108E  6100 00CC                115      BSR DRAW_BUTTON
-00001092                           116      
-00001092                           117      ; SECOND LINE OF BUTTONS
-00001092  3C3C 0000                118      MOVE #0,D6
-00001096  3E3C 0064                119      MOVE #100,D7
-0000109A  6100 00C0                120      BSR DRAW_BUTTON
-0000109E  3C3C 00A0                121      MOVE #160,D6
-000010A2  3E3C 0064                122      MOVE #100,D7
-000010A6  6100 00B4                123      BSR DRAW_BUTTON
-000010AA  3C3C 0140                124      MOVE #320,D6
-000010AE  3E3C 0064                125      MOVE #100,D7
-000010B2  6100 00A8                126      BSR DRAW_BUTTON
-000010B6  3C3C 01E0                127      MOVE #480,D6
-000010BA  3E3C 0064                128      MOVE #100,D7
-000010BE  6100 009C                129      BSR DRAW_BUTTON
-000010C2                           130      
-000010C2                           131      ; THIRD LINE OF BUTTONS
-000010C2  3C3C 0000                132      MOVE #0,D6
-000010C6  3E3C 00C8                133      MOVE #200,D7
-000010CA  6100 0090                134      BSR DRAW_BUTTON
-000010CE  3C3C 00A0                135      MOVE #160,D6
-000010D2  3E3C 00C8                136      MOVE #200,D7
-000010D6  6100 0084                137      BSR DRAW_BUTTON
-000010DA  3C3C 0140                138      MOVE #320,D6
-000010DE  3E3C 00C8                139      MOVE #200,D7
-000010E2  6100 0078                140      BSR DRAW_BUTTON
-000010E6  3C3C 01E0                141      MOVE #480,D6
-000010EA  3E3C 00C8                142      MOVE #200,D7
-000010EE  6100 006C                143      BSR DRAW_BUTTON
-000010F2                           144      
-000010F2                           145      ; FOURTH LINE OF BUTTONS
-000010F2  3C3C 0000                146      MOVE #0,D6
-000010F6  3E3C 012C                147      MOVE #300,D7
-000010FA  6100 0060                148      BSR DRAW_BUTTON
-000010FE  3C3C 00A0                149      MOVE #160,D6
-00001102  3E3C 012C                150      MOVE #300,D7
-00001106  6100 0054                151      BSR DRAW_BUTTON
-0000110A  3C3C 0140                152      MOVE #320,D6
-0000110E  3E3C 012C                153      MOVE #300,D7
-00001112  6100 0048                154      BSR DRAW_BUTTON
-00001116                           155      
-00001116  3C3C 01E0                156      MOVE #480,D6
-0000111A  3E3C 012C                157      MOVE #300,D7
-0000111E  6100 003C                158      BSR DRAW_BUTTON
-00001122                           159      
-00001122  4E75                     160      RTS
-00001124                           161      
-00001124                           162   
-00001124                           163  DRAW_OUTPUT_FIELD
-00001124                           164      ; SET PEN STYLE
-00001124  223C 00FFFFFF            165      MOVE.L  #WHITE,     D1          ; Set PEN color
-0000112A  103C 0050                166      MOVE.B  #NORMAL_PEN,     D0     ; SET PEN DRAW TYPE
-0000112E  4E4F                     167      TRAP    #15                     ; Trap (Perform action)
-00001130                           168    
-00001130                           169     ; Set X, Y, Width and Height
-00001130  223C 00000014            170     MOVE.L  #OUTPUT_POS_X,   D1      ; X START POS
-00001136  243C 00000014            171     MOVE.L  #OUTPUT_POS_Y,   D2      ; Y START POS
-0000113C                           172      
-0000113C  263C 00000014            173     MOVE.L  #OUTPUT_POS_X,   D3
-00001142  0683 00000258            174     ADD.L   #OUTPUT_WIDTH,   D3      ; Width  (STARTPOSX + WIDTH)
-00001148  283C 00000014            175     MOVE.L  #OUTPUT_POS_Y,   D4 
-0000114E  0684 00000050            176     ADD.L   #OUTPUT_HEIGHT,  D4     ; Height (STARTPOSY + HEIGHT)
-00001154                           177       
-00001154                           178     ; Draw FIELD
-00001154  103C 0057                179     MOVE.B  #PEN_DRAW,        D0    ; Draw queued pen
-00001158  4E4F                     180     TRAP    #15                     ; Trap (Perform action)
-0000115A                           181      
-0000115A  4E75                     182     RTS  
-0000115C                           183   
-0000115C                           184  DRAW_BUTTON
-0000115C                           185      ; SET PEN STYLE
-0000115C  223C 00FFFFFF            186      MOVE.L  #WHITE,     D1          ; Set PEN color
-00001162  BA7C 0001                187      CMP #1, D5
-00001166  6600 0008                188      BNE NOT_YELLOW
-0000116A                           189  
-0000116A  223C 0000FFFF            190      MOVE.L  #YELLOW,     D1  
-00001170                           191      
-00001170                           192  NOT_YELLOW
-00001170  103C 0050                193      MOVE.B  #NORMAL_PEN,     D0     ; SET PEN DRAW TYPE
-00001174  4E4F                     194      TRAP    #15                     ; Trap (Perform action)
-00001176                           195    
-00001176                           196     ; Set X, Y, Width and Height
-00001176  2206                     197     MOVE.L D6, D1
-00001178  2407                     198     MOVE.L D7, D2
-0000117A  0681 00000014            199     ADD.L   #BUTTON1_POS_X,   D1      ; X START POS
-00001180  0682 00000078            200     ADD.L   #BUTTON1_POS_Y,   D2      ; Y START POS
-00001186                           201     
-00001186  2601                     202     MOVE.L  D1,   D3
-00001188                           203     
-00001188  0683 00000078            204     ADD.L   #BUTTON1_WIDTH,   D3      ; Width  (STARTPOSX + WIDTH)
-0000118E  2802                     205     MOVE.L  D2,   D4 
-00001190  0684 00000050            206     ADD.L   #BUTTON1_HEIGHT,  D4     ; Height (STARTPOSY + HEIGHT)
-00001196                           207       
-00001196                           208     ; Draw FIELD
-00001196  103C 0057                209     MOVE.B  #PEN_DRAW,        D0    ; Draw queued pen
-0000119A  4E4F                     210     TRAP    #15                     ; Trap (Perform action)
-0000119C                           211      
-0000119C  4E75                     212     RTS  
-0000119E                           213  
-0000119E                           214  
-0000119E                           215  
-0000119E                           216  SIMHALT             ; halt simulator
-0000119E                           217  
-0000119E                           218  
-0000119E                           219  * Put variables and constants here
-0000119E                           220  
-0000119E  =00000051                221  FILL_BOX EQU  81 ; SET PEN TO FILL
-0000119E  =00000050                222  NORMAL_PEN EQU  80 ; SET PEN TO NORMAL
-0000119E  =00000057                223  PEN_DRAW EQU  87 ; DRAW QUEUED PEN
-0000119E                           224   
-0000119E  =00000014                225  OUTPUT_POS_X EQU 20
-0000119E  =00000014                226  OUTPUT_POS_Y EQU 20
-0000119E  =00000258                227  OUTPUT_WIDTH EQU 600
-0000119E  =00000050                228  OUTPUT_HEIGHT EQU 80
-0000119E                           229  
-0000119E  =00000014                230  BUTTON1_POS_X EQU 20
-0000119E  =00000078                231  BUTTON1_POS_Y EQU 120
-0000119E  =00000078                232  BUTTON1_WIDTH EQU 120
-0000119E  =00000050                233  BUTTON1_HEIGHT EQU 80
-0000119E                           234  
-0000119E  =000000A0                235  BUTTON2_POS_X EQU 160
-0000119E  =00000078                236  BUTTON2_POS_Y EQU 120
-0000119E  =00000078                237  BUTTON2_WIDTH EQU 120
-0000119E  =00000050                238  BUTTON2_HEIGHT EQU 80
-0000119E                           239  
-0000119E  =0000000D                240  CR  EQU  $0D
-0000119E  =0000000A                241  LF  EQU  $0A
-0000119E= 48 65 6C 6C 6F 20 ...    242  MESSAGE DC.B 'Hello World',CR,LF,0
-000011AC  =00FFFFFF                243  WHITE           EQU     $00FFFFFF ; A B G R (LEAST SIGNIFICANT)
-000011AC  =0000FFFF                244  YELLOW           EQU     $0000FFFF ; A B G R (LEAST SIGNIFICANT)
-000011AC  =000000FF                245  RED             EQU     $000000FF ; A B G R (LEAST SIGNIFICANT)
-000011AC                           246       END    START        ; last line of source
+00001022                            59  * CLEARS TEXT FIELDS
+00001022  7200                      60              MOVE.L #0000,D1
+00001024  103C 000B                 61              MOVE.B #11,D0
+00001028  4E4F                      62              TRAP #15
+0000102A                            63              
+0000102A  703D                      64              MOVEQ #61, D0
+0000102C  123C 0000                 65              MOVE.B #0, D1
+00001030  4E4F                      66              TRAP #15 // take in the mouse coordinates
+00001032                            67              
+00001032  2041                      68             MOVE.L D1, A0
+00001034  2200                      69             MOVE.L D0, D1
+00001036  2241                      70             MOVE.L D1, A1
+00001038                            71             * if D1 is not 0, theen button is pressed and d5 = 2
+00001038  143C 0004                 72             MOVE.B #4,D2
+0000103C  103C 0014                 73             MOVE.B #20,D0
+00001040  4E4F                      74             TRAP #15
+00001042                            75              
+00001042                            76             * coords are stored as #YYYY XXXX
+00001042  2208                      77             MOVE.L A0, D1
+00001044  2601                      78             MOVE.L D1,D3
+00001046  C2BC 0000FFFF             79             AND.L #$0000FFFF,D1
+0000104C  143C 0004                 80             MOVE.B #4,D2
+00001050  103C 0014                 81             MOVE.B #20,D0
+00001054  4E4F                      82             TRAP #15
+00001056                            83              
+00001056  7200                      84             MOVE.L #0, D1
+00001058  2203                      85             MOVE.L D3,D1
+0000105A  E089                      86             LSR.L #8,D1
+0000105C  E089                      87             LSR.L #8,D1
+0000105E  143C 0006                 88             MOVE.B #6,D2
+00001062  103C 0014                 89             MOVE.B #20,D0
+00001066  4E4F                      90             TRAP #15
+00001068                            91  
+00001068                            92              
+00001068                            93              
+00001068  4E75                      94              RTS
+0000106A                            95    
+0000106A                            96  *-------------------------------------------------------------------
+0000106A                            97  *
+0000106A                            98  *           Render Loop
+0000106A                            99  *
+0000106A                           100  *-------------------------------------------------------------------
+0000106A                           101  RENDER
+0000106A                           102      ; enable back buffer
+0000106A  103C 005E                103      MOVE.B  #94,        D0
+0000106E  4E4F                     104      TRAP    #15
+00001070                           105      
+00001070  6100 0208                106      BSR DRAW_OUTPUT_FIELD
+00001074                           107      
+00001074                           108      
+00001074  347C 0000                109      MOVE #0, A2
+00001078                           110      
+00001078                           111      ; first line of buttons
+00001078  3C3C 0000                112      MOVE #0,D6
+0000107C  3E3C 0000                113      MOVE #0,D7
+00001080  6100 0280                114      BSR CHECK_MOUSE
+00001084  6100 022C                115      BSR DRAW_BUTTON
+00001088                           116      
+00001088  BA7C 0000                117      CMP #0, D5
+0000108C  6700 0006                118      BEQ CONTINUE7
+00001090  347C 0007                119      MOVE #7, A2
+00001094                           120  CONTINUE7
+00001094  3A3C 0000                121      MOVE #0,D5
+00001098                           122      
+00001098  3C3C 00A0                123      MOVE #160,D6
+0000109C  3E3C 0000                124      MOVE #0,D7
+000010A0  6100 0260                125      BSR CHECK_MOUSE
+000010A4  6100 020C                126      BSR DRAW_BUTTON
+000010A8                           127      
+000010A8  BA7C 0000                128      CMP #0, D5
+000010AC  6700 0006                129      BEQ CONTINUE8
+000010B0  347C 0008                130      MOVE #8, A2
+000010B4                           131  CONTINUE8
+000010B4  3A3C 0000                132      MOVE #0,D5
+000010B8                           133      
+000010B8                           134  
+000010B8  3C3C 0140                135      MOVE #320,D6
+000010BC  3E3C 0000                136      MOVE #0,D7
+000010C0  6100 0240                137      BSR CHECK_MOUSE
+000010C4  6100 01EC                138      BSR DRAW_BUTTON
+000010C8                           139      
+000010C8  BA7C 0000                140      CMP #0, D5
+000010CC  6700 0006                141      BEQ CONTINUE9
+000010D0  347C 0009                142      MOVE #9, A2
+000010D4                           143  CONTINUE9
+000010D4  3A3C 0000                144      MOVE #0,D5
+000010D8                           145      
+000010D8                           146  
+000010D8  3C3C 01E0                147      MOVE #480,D6
+000010DC  3E3C 0000                148      MOVE #0,D7
+000010E0  6100 0220                149      BSR CHECK_MOUSE
+000010E4  6100 01CC                150      BSR DRAW_BUTTON
+000010E8                           151      
+000010E8  BA7C 0000                152      CMP #0, D5
+000010EC  6700 0006                153      BEQ CONTINUE11
+000010F0  347C 000B                154      MOVE #11, A2
+000010F4                           155  CONTINUE11
+000010F4  3A3C 0000                156      MOVE #0,D5
+000010F8                           157      
+000010F8                           158  
+000010F8                           159      
+000010F8                           160      ; SECOND LINE OF BUTTONS
+000010F8  3C3C 0000                161      MOVE #0,D6
+000010FC  3E3C 0064                162      MOVE #100,D7
+00001100  6100 0200                163      BSR CHECK_MOUSE
+00001104  6100 01AC                164      BSR DRAW_BUTTON
+00001108                           165      
+00001108  BA7C 0000                166      CMP #0, D5
+0000110C  6700 0006                167      BEQ CONTINUE4
+00001110  347C 0004                168      MOVE #4, A2
+00001114                           169  CONTINUE4
+00001114  3A3C 0000                170      MOVE #0,D5
+00001118                           171      
+00001118                           172  
+00001118  3C3C 00A0                173      MOVE #160,D6
+0000111C  3E3C 0064                174      MOVE #100,D7
+00001120  6100 01E0                175      BSR CHECK_MOUSE
+00001124  6100 018C                176      BSR DRAW_BUTTON
+00001128                           177      
+00001128  BA7C 0000                178      CMP #0, D5
+0000112C  6700 0006                179      BEQ CONTINUE5
+00001130  347C 0005                180      MOVE #5, A2
+00001134                           181  CONTINUE5
+00001134  3A3C 0000                182      MOVE #0,D5
+00001138                           183      
+00001138                           184  
+00001138  3C3C 0140                185      MOVE #320,D6
+0000113C  3E3C 0064                186      MOVE #100,D7    
+00001140  6100 01C0                187      BSR CHECK_MOUSE
+00001144  6100 016C                188      BSR DRAW_BUTTON
+00001148                           189      
+00001148  BA7C 0000                190      CMP #0, D5
+0000114C  6700 0006                191      BEQ CONTINUE6
+00001150  347C 0006                192      MOVE #6, A2
+00001154                           193  CONTINUE6
+00001154  3A3C 0000                194      MOVE #0,D5
+00001158                           195      
+00001158                           196  
+00001158  3C3C 01E0                197      MOVE #480,D6
+0000115C  3E3C 0064                198      MOVE #100,D7
+00001160  6100 01A0                199      BSR CHECK_MOUSE
+00001164  6100 014C                200      BSR DRAW_BUTTON
+00001168                           201      
+00001168  BA7C 0000                202      CMP #0, D5
+0000116C  6700 0006                203      BEQ CONTINUE12
+00001170  347C 000C                204      MOVE #12, A2
+00001174                           205  CONTINUE12
+00001174  3A3C 0000                206      MOVE #0,D5
+00001178                           207      
+00001178                           208  
+00001178                           209      
+00001178                           210      ; THIRD LINE OF BUTTONS
+00001178  3C3C 0000                211      MOVE #0,D6
+0000117C  3E3C 00C8                212      MOVE #200,D7
+00001180  6100 0180                213      BSR CHECK_MOUSE
+00001184  6100 012C                214      BSR DRAW_BUTTON
+00001188                           215      
+00001188  BA7C 0000                216      CMP #0, D5
+0000118C  6700 0006                217      BEQ CONTINUE1
+00001190  347C 0001                218      MOVE #1, A2
+00001194                           219  CONTINUE1
+00001194  3A3C 0000                220      MOVE #0,D5
+00001198                           221      
+00001198                           222  
+00001198  3C3C 00A0                223      MOVE #160,D6
+0000119C  3E3C 00C8                224      MOVE #200,D7
+000011A0  6100 0160                225      BSR CHECK_MOUSE
+000011A4  6100 010C                226      BSR DRAW_BUTTON
+000011A8                           227      
+000011A8  BA7C 0000                228      CMP #0, D5
+000011AC  6700 0006                229      BEQ CONTINUE2
+000011B0  347C 0002                230      MOVE #2, A2
+000011B4                           231  CONTINUE2
+000011B4  3A3C 0000                232      MOVE #0,D5
+000011B8                           233      
+000011B8                           234  
+000011B8  3C3C 0140                235      MOVE #320,D6
+000011BC  3E3C 00C8                236      MOVE #200,D7
+000011C0  6100 0140                237      BSR CHECK_MOUSE
+000011C4  6100 00EC                238      BSR DRAW_BUTTON
+000011C8                           239      
+000011C8  BA7C 0000                240       CMP #0, D5
+000011CC  6700 0006                241      BEQ CONTINUE3
+000011D0  347C 0004                242      MOVE #4, A2
+000011D4                           243  CONTINUE3
+000011D4  3A3C 0000                244      MOVE #0,D5
+000011D8                           245      
+000011D8                           246  
+000011D8  3C3C 01E0                247      MOVE #480,D6
+000011DC  3E3C 00C8                248      MOVE #200,D7
+000011E0  6100 0120                249      BSR CHECK_MOUSE
+000011E4  6100 00CC                250      BSR DRAW_BUTTON
+000011E8                           251      
+000011E8  BA7C 0000                252      CMP #0, D5
+000011EC  6700 0006                253      BEQ CONTINUE13
+000011F0  347C 000D                254      MOVE #13, A2
+000011F4                           255  CONTINUE13
+000011F4  3A3C 0000                256      MOVE #0,D5
+000011F8                           257      
+000011F8                           258  
+000011F8                           259      
+000011F8                           260      ; FOURTH LINE OF BUTTONS
+000011F8  3C3C 0000                261      MOVE #0,D6
+000011FC  3E3C 012C                262      MOVE #300,D7
+00001200  6100 0100                263      BSR CHECK_MOUSE
+00001204  6100 00AC                264      BSR DRAW_BUTTON
+00001208                           265      
+00001208  BA7C 0000                266      CMP #0, D5
+0000120C  6700 0006                267      BEQ CONTINUE10
+00001210  347C 000A                268      MOVE #10, A2
+00001214                           269  CONTINUE10
+00001214  3A3C 0000                270      MOVE #0,D5
+00001218                           271      
+00001218                           272  
+00001218  3C3C 00A0                273      MOVE #160,D6
+0000121C  3E3C 012C                274      MOVE #300,D7
+00001220  6100 00E0                275      BSR CHECK_MOUSE
+00001224  6100 008C                276      BSR DRAW_BUTTON
+00001228                           277      
+00001228  BA7C 0000                278      CMP #0, D5
+0000122C  6700 0006                279      BEQ CONTINUE14
+00001230  347C 000E                280      MOVE #14, A2
+00001234                           281  CONTINUE14
+00001234  3A3C 0000                282      MOVE #0,D5
+00001238                           283      
+00001238                           284  
+00001238  3C3C 0140                285      MOVE #320,D6
+0000123C  3E3C 012C                286      MOVE #300,D7
+00001240  6100 00C0                287      BSR CHECK_MOUSE
+00001244  6100 006C                288      BSR DRAW_BUTTON
+00001248                           289      
+00001248  BA7C 0000                290      CMP #0, D5
+0000124C  6700 0006                291      BEQ CONTINUE15
+00001250  347C 000F                292      MOVE #15, A2
+00001254                           293  CONTINUE15
+00001254  3A3C 0000                294      MOVE #0,D5
+00001258                           295      
+00001258                           296  
+00001258                           297      
+00001258  3C3C 01E0                298      MOVE #480,D6
+0000125C  3E3C 012C                299      MOVE #300,D7
+00001260  6100 00A0                300      BSR CHECK_MOUSE
+00001264  6100 004C                301      BSR DRAW_BUTTON
+00001268                           302      
+00001268  BA7C 0000                303      CMP #0, D5
+0000126C  6700 0006                304      BEQ CONTINUE16
+00001270  347C 0010                305      MOVE #16, A2
+00001274                           306  CONTINUE16
+00001274  3A3C 0000                307      MOVE #0,D5
+00001278                           308      
+00001278                           309  
+00001278                           310      
+00001278  4E75                     311      RTS
+0000127A                           312  
+0000127A                           313  
+0000127A                           314  *-------------------------------------------------------------------
+0000127A                           315  *
+0000127A                           316  *           draw output field
+0000127A                           317  *
+0000127A                           318  *-------------------------------------------------------------------
+0000127A                           319  DRAW_OUTPUT_FIELD
+0000127A                           320      ; SET PEN STYLE
+0000127A  223C 00FFFFFF            321      MOVE.L  #WHITE,     D1          ; Set PEN color
+00001280  103C 0050                322      MOVE.B  #NORMAL_PEN,     D0     ; SET PEN DRAW TYPE
+00001284  4E4F                     323      TRAP    #15                     ; Trap (Perform action)
+00001286                           324    
+00001286                           325     ; Set X, Y, Width and Height
+00001286  223C 00000014            326     MOVE.L  #OUTPUT_POS_X,   D1      ; X START POS
+0000128C  243C 00000014            327     MOVE.L  #OUTPUT_POS_Y,   D2      ; Y START POS
+00001292                           328      
+00001292  263C 00000014            329     MOVE.L  #OUTPUT_POS_X,   D3
+00001298  0683 00000258            330     ADD.L   #OUTPUT_WIDTH,   D3      ; Width  (STARTPOSX + WIDTH)
+0000129E  283C 00000014            331     MOVE.L  #OUTPUT_POS_Y,   D4 
+000012A4  0684 00000050            332     ADD.L   #OUTPUT_HEIGHT,  D4     ; Height (STARTPOSY + HEIGHT)
+000012AA                           333       
+000012AA                           334     ; Draw FIELD
+000012AA  103C 0057                335     MOVE.B  #PEN_DRAW,        D0    ; Draw queued pen
+000012AE  4E4F                     336     TRAP    #15                     ; Trap (Perform action)
+000012B0                           337      
+000012B0  4E75                     338     RTS  
+000012B2                           339   
+000012B2                           340  *-------------------------------------------------------------------
+000012B2                           341  *
+000012B2                           342  *           DRAW BUTTON
+000012B2                           343  *
+000012B2                           344  *-------------------------------------------------------------------
+000012B2                           345  DRAW_BUTTON
+000012B2                           346      ; SET PEN STYLE
+000012B2  223C 00FFFFFF            347      MOVE.L  #WHITE,     D1          ; Set PEN color
+000012B8  BA7C 0001                348      CMP #1, D5
+000012BC  6600 0016                349      BNE NOT_YELLOW
+000012C0                           350  
+000012C0  223C 0000FFFF            351      MOVE.L  #YELLOW,     D1  
+000012C6                           352  
+000012C6  BA7C 0002                353      CMP #2, D5
+000012CA  6600 0008                354      BNE NOT_BLUE
+000012CE  223C 00FF0000            355      MOVE.L  #BLUE,     D1  
+000012D4                           356  
+000012D4                           357  NOT_BLUE
+000012D4                           358  NOT_YELLOW
+000012D4  103C 0050                359      MOVE.B  #NORMAL_PEN,     D0     ; SET PEN DRAW TYPE
+000012D8  4E4F                     360      TRAP    #15                     ; Trap (Perform action)
+000012DA                           361    
+000012DA                           362     ; Set X, Y, Width and Height
+000012DA  2206                     363     MOVE.L D6, D1
+000012DC  2407                     364     MOVE.L D7, D2
+000012DE  0681 00000014            365     ADD.L   #BUTTON1_POS_X,   D1      ; X START POS
+000012E4  0682 00000078            366     ADD.L   #BUTTON1_POS_Y,   D2      ; Y START POS
+000012EA                           367     
+000012EA  2601                     368     MOVE.L  D1,   D3
+000012EC                           369     
+000012EC  0683 00000078            370     ADD.L   #BUTTON1_WIDTH,   D3      ; Width  (STARTPOSX + WIDTH)
+000012F2  2802                     371     MOVE.L  D2,   D4 
+000012F4  0684 00000050            372     ADD.L   #BUTTON1_HEIGHT,  D4     ; Height (STARTPOSY + HEIGHT)
+000012FA                           373       
+000012FA                           374     ; Draw FIELD
+000012FA  103C 0057                375     MOVE.B  #PEN_DRAW,        D0    ; Draw queued pen
+000012FE  4E4F                     376     TRAP    #15                     ; Trap (Perform action)
+00001300                           377      
+00001300  4E75                     378     RTS  
+00001302                           379  
+00001302                           380  
+00001302                           381  *-------------------------------------------------------------------
+00001302                           382  *
+00001302                           383  *           Check mouse
+00001302                           384  *
+00001302                           385  *-------------------------------------------------------------------
+00001302                           386  CHECK_MOUSE
+00001302                           387     * SET X BUTTON POSITION
+00001302  2206                     388     MOVE.L D6, D1
+00001304  0681 00000014            389     ADD.L #BUTTON1_POS_X,   D1
+0000130A                           390     
+0000130A                           391     * SET X MOUSE COORDINATES INTO D3
+0000130A  2608                     392     MOVE.L A0,D3
+0000130C  C6BC 0000FFFF            393     AND.L #$0000FFFF,D3
+00001312                           394  
+00001312                           395     * CHECK X COORDS ARE WITHIN BOX
+00001312  B243                     396     CMP D3, D1
+00001314  6E00 003C                397     BGT OUTSIDE_BOUNDS
+00001318  0681 00000078            398     ADD.L   #BUTTON1_WIDTH,   D1
+0000131E  B243                     399     CMP D3, D1
+00001320  6D00 0030                400     BLT OUTSIDE_BOUNDS
+00001324                           401      
+00001324                           402      
+00001324                           403      * SET Y BUTTON POSITION
+00001324  2207                     404     MOVE.L D7, D1
+00001326  0681 00000078            405     ADD.L #BUTTON1_POS_Y,   D1
+0000132C                           406     
+0000132C                           407     * SET Y MOUSE COORDINATES INTO D3
+0000132C  2608                     408      MOVE.L A0,D3
+0000132E  E08B                     409      LSR.L #8,D3
+00001330  E08B                     410      LSR.L #8,D3
+00001332                           411     
+00001332                           412  
+00001332  B243                     413     CMP D3, D1
+00001334  6E00 001C                414     BGT OUTSIDE_BOUNDS
+00001338  0681 00000050            415     ADD.L   #BUTTON1_HEIGHT,   D1
+0000133E  B243                     416     CMP D3, D1
+00001340  6D00 0010                417     BLT OUTSIDE_BOUNDS
+00001344                           418      
+00001344  3A09                     419     MOVE A1, D5
+00001346  BA7C 0000                420     CMP #0, D5
+0000134A  6600 0004                421     BNE NO_CLICK
+0000134E  7A02                     422     MOVEQ #2, D5
+00001350                           423  
+00001350                           424  NO_CLICK  
+00001350  7A01                     425     MOVEQ #1, D5
+00001352                           426     
+00001352                           427    
+00001352                           428  
+00001352                           429  OUTSIDE_BOUNDS
+00001352  4E75                     430     RTS
+00001354                           431  
+00001354                           432  SIMHALT             ; halt simulator
+00001354                           433  
+00001354                           434  
+00001354                           435  * Put variables and constants here
+00001354                           436  
+00001354  =00000051                437  FILL_BOX EQU  81 ; SET PEN TO FILL
+00001354  =00000050                438  NORMAL_PEN EQU  80 ; SET PEN TO NORMAL
+00001354  =00000057                439  PEN_DRAW EQU  87 ; DRAW QUEUED PEN
+00001354                           440   
+00001354  =00000014                441  OUTPUT_POS_X EQU 20
+00001354  =00000014                442  OUTPUT_POS_Y EQU 20
+00001354  =00000258                443  OUTPUT_WIDTH EQU 600
+00001354  =00000050                444  OUTPUT_HEIGHT EQU 80
+00001354                           445  
+00001354  =00000014                446  BUTTON1_POS_X EQU 20
+00001354  =00000078                447  BUTTON1_POS_Y EQU 120
+00001354  =00000078                448  BUTTON1_WIDTH EQU 120
+00001354  =00000050                449  BUTTON1_HEIGHT EQU 80
+00001354                           450  
+00001354  =000000A0                451  BUTTON2_POS_X EQU 160
+00001354  =00000078                452  BUTTON2_POS_Y EQU 120
+00001354  =00000078                453  BUTTON2_WIDTH EQU 120
+00001354  =00000050                454  BUTTON2_HEIGHT EQU 80
+00001354                           455  
+00001354  =0000000D                456  CR  EQU  $0D
+00001354  =0000000A                457  LF  EQU  $0A
+00001354= 48 65 6C 6C 6F 20 ...    458  MESSAGE DC.B 'Hello World',CR,LF,0
+00001362  =00FFFFFF                459  WHITE           EQU     $00FFFFFF ; A B G R (LEAST SIGNIFICANT)
+00001362  =00FF0000                460  BLUE           EQU     $00FF0000 ; A B G R (LEAST SIGNIFICANT)
+00001362  =0000FFFF                461  YELLOW           EQU     $0000FFFF ; A B G R (LEAST SIGNIFICANT)
+00001362  =000000FF                462  RED             EQU     $000000FF ; A B G R (LEAST SIGNIFICANT)
+00001362                           463       END    START        ; last line of source
 
 No errors detected
 No warnings generated
@@ -256,6 +473,7 @@ No warnings generated
 SYMBOL TABLE INFORMATION
 Symbol-name         Value
 -------------------------
+BLUE                FF0000
 BUTTON1_HEIGHT      50
 BUTTON1_POS_X       14
 BUTTON1_POS_Y       78
@@ -264,24 +482,44 @@ BUTTON2_HEIGHT      50
 BUTTON2_POS_X       A0
 BUTTON2_POS_Y       78
 BUTTON2_WIDTH       78
+CHECK_MOUSE         1302
+CONTINUE1           1194
+CONTINUE10          1214
+CONTINUE11          10F4
+CONTINUE12          1174
+CONTINUE13          11F4
+CONTINUE14          1234
+CONTINUE15          1254
+CONTINUE16          1274
+CONTINUE2           11B4
+CONTINUE3           11D4
+CONTINUE4           1114
+CONTINUE5           1134
+CONTINUE6           1154
+CONTINUE7           1094
+CONTINUE8           10B4
+CONTINUE9           10D4
 CR                  D
-DRAW_BUTTON         115C
-DRAW_OUTPUT_FIELD   1124
+DRAW_BUTTON         12B2
+DRAW_OUTPUT_FIELD   127A
 FILL_BOX            51
 GAME_LOOP           1012
 GET_MOUSE           1022
 LF                  A
-MESSAGE             119E
+MESSAGE             1354
 NORMAL_PEN          50
-NOT_YELLOW          1170
+NOT_BLUE            12D4
+NOT_YELLOW          12D4
+NO_CLICK            1350
 OUTPUT_HEIGHT       50
 OUTPUT_POS_X        14
 OUTPUT_POS_Y        14
 OUTPUT_WIDTH        258
+OUTSIDE_BOUNDS      1352
 PEN_DRAW            57
 RED                 FF
-RENDER              1058
-SIMHALT             119E
+RENDER              106A
+SIMHALT             1354
 START               1000
 UPDATE              101C
 WHITE               FFFFFF
