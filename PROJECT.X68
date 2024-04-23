@@ -186,25 +186,28 @@ NOT_0
 
             CMP #11, D0
             BNE NOT_11
-            * CLICKED 11 IN BUTTONS
+            * CLICKED MULTIPLICATION IN BUTTONS
             MOVE #1, A4
 NOT_11
 
             CMP #12, D0
             BNE NOT_12
-            * CLICKED 12 IN BUTTONS
+            * CLICKED PLUS IN BUTTONS
             MOVE #2, A4
 NOT_12
 
             CMP #13, D0
             BNE NOT_13
-            * CLICKED 13 IN BUTTONS
+            * CLICKED MINUS IN BUTTONS
             MOVE #3, A4
 NOT_13
             CMP #14, D0
             BNE NOT_14
-            * CLICKED 11 IN BUTTONS
-            MOVE #5, A4
+            * CLICKED clear IN BUTTONS
+            MOVE #0, A3
+            MOVE #0, A4
+            MOVE #0, A5
+            MOVE #0, A6
 NOT_14   
             CMP #15, D0
             BNE NOT_15
@@ -240,7 +243,7 @@ NOT_DIVISION
 NOT_15
             CMP #16, D0
             BNE NOT_16
-            * CLICKED 11 IN BUTTONS
+            * CLICKED DIVISION IN BUTTONS
             MOVE #4, A4
 NOT_16
             MOVE.L #0000,D1
@@ -249,7 +252,7 @@ NOT_16
             
             MOVE A6, D1
             MOVE.B #6, D3
-            MOVE.B #20, D0
+            MOVE.B #1, D0
             TRAP #15
             
 *            MOVE A4, D1
@@ -674,6 +677,7 @@ BLUE           EQU     $00FF0000 ; A B G R (LEAST SIGNIFICANT)
 YELLOW           EQU     $0000FFFF ; A B G R (LEAST SIGNIFICANT)
 RED             EQU     $000000FF ; A B G R (LEAST SIGNIFICANT)
      END    START        ; last line of source
+
 
 
 
