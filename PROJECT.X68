@@ -46,9 +46,223 @@ GAME_LOOP
 *-------------------------------------------------------------------
 UPDATE
             BSR GET_MOUSE
+            MOVE.L A1, D0
+            CMP #1, D0
+            BLT NO_CLICK
+            BSR HANDLE_CLICK
+NO_CLICK
             RTS
             
+
+*-------------------------------------------------------------------
+*
+*           HANDLE CLICK
+*
+*-------------------------------------------------------------------
+HANDLE_CLICK
+            MOVE A2, D0
             
+            CMP #1, D0
+            BNE NOT_1
+            * CLICKED 1 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_1
+            MOVE #1, A5
+            RTS
+NO_OP_1
+            MOVE #1, A3 
+NOT_1
+            
+            CMP #2, D0
+            BNE NOT_2
+            * CLICKED 2 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_2
+            MOVE #2, A5
+            RTS
+NO_OP_2
+            MOVE #2, A3 
+NOT_2
+
+            CMP #3, D0
+            BNE NOT_3
+            * CLICKED 3 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_3
+            MOVE #3, A5
+            RTS
+NO_OP_3
+            MOVE #3, A3 
+NOT_3
+      
+            
+            CMP #4, D0
+            BNE NOT_4
+            * CLICKED 4 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_4
+            MOVE #4, A5
+            RTS
+NO_OP_4
+            MOVE #4, A3 
+NOT_4
+
+            CMP #5, D0
+            BNE NOT_5
+            * CLICKED 5 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_5
+            MOVE #5, A5
+            RTS
+NO_OP_5
+            MOVE #5, A3 
+NOT_5
+
+            CMP #6, D0
+            BNE NOT_6
+            * CLICKED 6 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_6
+            MOVE #6, A5
+            RTS
+NO_OP_6
+            MOVE #6, A3 
+NOT_6
+            CMP #7, D0
+            BNE NOT_7
+            * CLICKED 7 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_7
+            MOVE #7, A5
+            RTS
+NO_OP_7
+            MOVE #7, A3 
+NOT_7
+
+            CMP #8, D0
+            BNE NOT_8
+            * CLICKED 8 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_8
+            MOVE #8, A5
+            RTS
+NO_OP_8
+            MOVE #8, A3 
+NOT_8
+
+            CMP #9, D0
+            BNE NOT_9
+            * CLICKED 9 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_9
+            MOVE #9, A5
+            RTS
+NO_OP_9
+            MOVE #9, A3 
+NOT_9
+
+            CMP #10, D0
+            BNE NOT_0
+            * CLICKED 0 IN BUTTONS
+            MOVE A4, D1
+            CMP #1, D1
+            BLT NO_OP_0
+            MOVE #0, A5
+            RTS
+NO_OP_0
+            MOVE #0, A3 
+NOT_0
+
+
+
+            CMP #11, D0
+            BNE NOT_11
+            * CLICKED 11 IN BUTTONS
+            MOVE #1, A4
+NOT_11
+
+            CMP #12, D0
+            BNE NOT_12
+            * CLICKED 12 IN BUTTONS
+            MOVE #2, A4
+NOT_12
+
+            CMP #13, D0
+            BNE NOT_13
+            * CLICKED 13 IN BUTTONS
+            MOVE #3, A4
+NOT_13
+            CMP #14, D0
+            BNE NOT_14
+            * CLICKED 11 IN BUTTONS
+            MOVE #5, A4
+NOT_14   
+            CMP #15, D0
+            BNE NOT_15
+            * CLICKED EQUALS IN BUTTONS
+            MOVE A4, D0
+            MOVE A3, D1
+            MOVE A5, D2
+            CMP #1, D0
+            BNE NOT_MULTIPLY
+            MULS D1, D2
+            MOVE D2, A6
+            BSR NOT_15
+NOT_MULTIPLY
+            CMP #2, D0
+            BNE NOT_ADDITION
+            ADD D1, D2
+            MOVE D2, A6
+            BSR NOT_15
+NOT_ADDITION
+            CMP #3, D0
+            BNE NOT_SUBTRACTION
+            SUB.L D2, D1
+            MOVE D2, A6
+            BSR NOT_15
+NOT_SUBTRACTION
+            CMP #4, D0
+            BNE NOT_DIVISION
+            DIVS D2, D1
+            MOVE D2, A6
+            BSR NOT_15
+NOT_DIVISION
+
+NOT_15
+            CMP #16, D0
+            BNE NOT_16
+            * CLICKED 11 IN BUTTONS
+            MOVE #4, A4
+NOT_16
+            MOVE.L #0000,D1
+            MOVE.B #11,D0
+            TRAP #15
+            
+            MOVE A6, D1
+            MOVE.B #6, D3
+            MOVE.B #20, D0
+            TRAP #15
+            
+*            MOVE A4, D1
+*            MOVE.B #20, D3
+*            MOVE.B #20, D0
+*            TRAP #15
+*            
+*            MOVE A5, D1
+*            MOVE.B #20, D3
+*            MOVE.B #20, D0
+*            TRAP #15
+            
+            RTS            
             
 *-------------------------------------------------------------------
 *
@@ -57,9 +271,9 @@ UPDATE
 *-------------------------------------------------------------------
 GET_MOUSE
 * CLEARS TEXT FIELDS
-            MOVE.L #0000,D1
-            MOVE.B #11,D0
-            TRAP #15
+            *MOVE.L #0000,D1
+            *MOVE.B #11,D0
+            *TRAP #15
             
             MOVEQ #61, D0
             MOVE.B #0, D1
@@ -69,25 +283,25 @@ GET_MOUSE
            MOVE.L D0, D1
            MOVE.L D1, A1
            * if D1 is not 0, theen button is pressed and d5 = 2
-           MOVE.B #4,D2
-           MOVE.B #20,D0
-           TRAP #15
+           *MOVE.B #4,D2
+           *MOVE.B #20,D0
+           *TRAP #15
             
            * coords are stored as #YYYY XXXX
            MOVE.L A0, D1
            MOVE.L D1,D3
            AND.L #$0000FFFF,D1
-           MOVE.B #4,D2
-           MOVE.B #20,D0
-           TRAP #15
+           *MOVE.B #4,D2
+           *MOVE.B #20,D0
+           *TRAP #15
             
            MOVE.L #0, D1
            MOVE.L D3,D1
            LSR.L #8,D1
            LSR.L #8,D1
-           MOVE.B #6,D2
-           MOVE.B #20,D0
-           TRAP #15
+           *MOVE.B #6,D2
+           *MOVE.B #20,D0
+           *TRAP #15
 
             
             
@@ -239,7 +453,7 @@ CONTINUE2
     
      CMP #0, D5
     BEQ CONTINUE3
-    MOVE #4, A2
+    MOVE #3, A2
 CONTINUE3
     MOVE #0,D5
     
@@ -349,13 +563,14 @@ DRAW_BUTTON
     BNE NOT_YELLOW
 
     MOVE.L  #YELLOW,     D1  
-
+    
+    
+NOT_YELLOW
     CMP #2, D5
     BNE NOT_BLUE
-    MOVE.L  #BLUE,     D1  
-
+    MOVE.L #BLUE, D1
+    
 NOT_BLUE
-NOT_YELLOW
     MOVE.B  #NORMAL_PEN,     D0     ; SET PEN DRAW TYPE
     TRAP    #15                     ; Trap (Perform action)
   
@@ -416,14 +631,12 @@ CHECK_MOUSE
    CMP D3, D1
    BLT OUTSIDE_BOUNDS
     
-   MOVE A1, D5
-   CMP #0, D5
-   BNE NO_CLICK
-   MOVEQ #2, D5
-
-NO_CLICK  
    MOVEQ #1, D5
-   
+
+   MOVE.L A1, D0
+   CMP #1, D0
+   BLT OUTSIDE_BOUNDS
+   ADD.L #1, D5
   
 
 OUTSIDE_BOUNDS
@@ -461,6 +674,9 @@ BLUE           EQU     $00FF0000 ; A B G R (LEAST SIGNIFICANT)
 YELLOW           EQU     $0000FFFF ; A B G R (LEAST SIGNIFICANT)
 RED             EQU     $000000FF ; A B G R (LEAST SIGNIFICANT)
      END    START        ; last line of source
+
+
+
 
 
 
