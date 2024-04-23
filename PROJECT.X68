@@ -252,7 +252,7 @@ NOT_16
             
             MOVE A6, D1
             MOVE.B #6, D3
-            MOVE.B #1, D0
+            MOVE.B #20, D0
             TRAP #15
             
 *            MOVE A4, D1
@@ -524,6 +524,7 @@ CONTINUE16
     MOVE #0,D5
     
 
+            BSR DRAW_BUTTON_TEXT
     
     RTS
 
@@ -645,6 +646,115 @@ CHECK_MOUSE
 OUTSIDE_BOUNDS
    RTS
 
+
+*-------------------------------------------------------------------
+*
+*           TEXT LABELS ON THE BUTTONS
+*
+*-------------------------------------------------------------------
+DRAW_BUTTON_TEXT
+            MOVE A1, D3
+            
+            LEA ZERO, A1
+            MOVE #95, D0
+            MOVE #80, D1 ;X
+            MOVE #450, D2 ;Y
+            TRAP #15
+            
+            LEA _CLEAR, A1
+            MOVE #95, D0
+            MOVE #230, D1 ;X
+            MOVE #450, D2 ;Y
+            TRAP #15
+            
+            LEA _EQUAL, A1
+            MOVE #95, D0
+            MOVE #390, D1 ; X
+            MOVE #450, D2 ; Y
+            TRAP #15
+            
+            LEA DIVIDE, A1
+            MOVE #95, D0
+            MOVE #550, D1 ; X
+            MOVE #450, D2 ; Y
+            TRAP #15
+            
+            LEA ONE, A1
+            MOVE #95, D0
+            MOVE #80, D1 ; X
+            MOVE #350, D2 ; Y
+            TRAP #15
+            
+            LEA TWO, A1
+            MOVE #95, D0
+            MOVE #230, D1 ; X
+            MOVE #350, D2 ; Y
+            TRAP #15
+            
+            LEA THREE, A1
+            MOVE #95, D0
+            MOVE #390, D1 ;X
+            MOVE #350, D2 ;Y
+            TRAP #15
+            
+            LEA SUBTRACT, A1
+            MOVE #95, D0
+            MOVE #550, D1 ;X
+            MOVE #350, D2 ;Y
+            TRAP #15
+            
+            LEA FOUR, A1
+            MOVE #95, D0
+            MOVE #80, D1 ; X
+            MOVE #250, D2 ; Y
+            TRAP #15
+            
+            LEA FIVE, A1
+            MOVE #95, D0
+            MOVE #230, D1 ; X
+            MOVE #250, D2 ; Y
+            TRAP #15
+            
+            LEA SIX, A1
+            MOVE #95, D0
+            MOVE #390, D1 ;X
+            MOVE #250, D2 ;Y
+            TRAP #15
+            
+            LEA ADDITION, A1
+            MOVE #95, D0
+            MOVE #550, D1 ;X
+            MOVE #250, D2 ;Y
+            TRAP #15
+            
+            LEA SEVEN, A1
+            MOVE #95, D0
+            MOVE #80, D1 ; X
+            MOVE #150, D2 ; Y
+            TRAP #15
+            
+            LEA EIGHT, A1
+            MOVE #95, D0
+            MOVE #230, D1 ; X
+            MOVE #150, D2 ; Y
+            TRAP #15
+            
+            LEA NINE, A1
+            MOVE #95, D0
+            MOVE #390, D1 ;X
+            MOVE #150, D2 ;Y
+            TRAP #15
+            
+            LEA MULTIPLY, A1
+            MOVE #95, D0
+            MOVE #550, D1 ;X
+            MOVE #150, D2 ;Y
+            TRAP #15
+            
+            MOVE D3, A1
+            RTS
+
+
 SIMHALT             ; halt simulator
 
 
@@ -671,12 +781,30 @@ BUTTON2_HEIGHT EQU 80
 
 CR  EQU  $0D
 LF  EQU  $0A
-MESSAGE DC.B 'Hello World',CR,LF,0
+ZERO DC.B '0',CR,LF,0
+_CLEAR DC.B 'CE',CR,LF,0
+_EQUAL DC.B '=',CR,LF,0
+DIVIDE DC.B '/',CR,LF,0
+ONE DC.B '1',CR,LF,0
+TWO DC.B '2',CR,LF,0
+THREE DC.B '3',CR,LF,0
+SUBTRACT DC.B '-',CR,LF,0
+FOUR DC.B '4',CR,LF,0
+FIVE DC.B '5',CR,LF,0
+SIX DC.B '6',CR,LF,0
+ADDITION DC.B '+',CR,LF,0
+SEVEN DC.B '7',CR,LF,0
+EIGHT DC.B '8',CR,LF,0
+NINE DC.B '9',CR,LF,0
+MULTIPLY DC.B 'x',CR,LF,0
 WHITE           EQU     $00FFFFFF ; A B G R (LEAST SIGNIFICANT)
 BLUE           EQU     $00FF0000 ; A B G R (LEAST SIGNIFICANT)
 YELLOW           EQU     $0000FFFF ; A B G R (LEAST SIGNIFICANT)
 RED             EQU     $000000FF ; A B G R (LEAST SIGNIFICANT)
+
+
      END    START        ; last line of source
+
 
 
 
