@@ -1,0 +1,1880 @@
+00000000 Starting Address
+Assembler used: EASy68K Editor/Assembler v5.16.01
+Created On: 24/04/2024 14:35:41
+
+Line 1 ERROR: Illegal symbol
+00000000                             1  00000000                             1  *-----------------------------------------------------------
+Line 2 ERROR: Illegal symbol
+00000000                             2  00000000                             2  * Title      : ASSEMBLY BASED CALCULATOR
+Line 3 ERROR: Illegal symbol
+00000000                             3  00000000                             3  * Written by : David Strikaitis, Veronika Syncakova
+Line 4 ERROR: Illegal symbol
+00000000                             4  00000000                             4  * Date       : 14/03/2024
+Line 5 ERROR: Illegal symbol
+00000000                             5  00000000                             5  * Description:
+Line 6 ERROR: Illegal symbol
+00000000                             6  00000000                             6  *-----------------------------------------------------------
+Line 7 ERROR: Illegal symbol
+00000000                             7  00001000                             7        ORG    $1000
+Line 8 ERROR: Illegal symbol
+00000000                             8  00001000                             8  START:                ; first instruction of program
+Line 9 ERROR: Illegal symbol
+00000000                             9  00001000                             9    
+Line 10 ERROR: Illegal symbol
+00000000                            10  00001000                            10    * Put program code here
+Line 11 ERROR: Illegal symbol
+00000000                            11  00001000                            11  
+Line 12 ERROR: Illegal symbol
+00000000                            12  00001000                            12  *-------------------------------------------------------------------
+Line 13 ERROR: Illegal symbol
+00000000                            13  00001000                            13  *
+Line 14 ERROR: Illegal symbol
+00000000                            14  00001000                            14  *           adjusting window size
+Line 15 ERROR: Illegal symbol
+00000000                            15  00001000                            15  *
+Line 16 ERROR: Illegal symbol
+00000000                            16  00001000                            16  *-------------------------------------------------------------------
+Line 17 ERROR: Illegal symbol
+00000000                            17  00001000  103C 0021                 17    MOVE.B #33, D0
+Line 18 ERROR: Illegal symbol
+00000000                            18  00001004  223C 02580226             18    MOVE.L #(600<<16+550), D1 ; setup window size
+Line 19 ERROR: Illegal symbol
+00000000                            19  0000100A  4E4F                      19    TRAP #15
+Line 20 ERROR: Illegal symbol
+00000000                            20  0000100C                            20    
+Line 21 ERROR: Illegal symbol
+00000000                            21  0000100C                            21  *-------------------------------------------------------------------
+Line 22 ERROR: Illegal symbol
+00000000                            22  0000100C                            22  *
+Line 23 ERROR: Illegal symbol
+00000000                            23  0000100C                            23  *           ENABLE MOUSE 
+Line 24 ERROR: Illegal symbol
+00000000                            24  0000100C                            24  *
+Line 25 ERROR: Illegal symbol
+00000000                            25  0000100C                            25  *-------------------------------------------------------------------
+Line 26 ERROR: Illegal symbol
+00000000                            26  0000100C  103C 003C                 26         MOVE.B #60, D0
+Line 27 ERROR: Illegal symbol
+00000000                            27  00001010  4E4F                      27         TRAP #15
+Line 28 ERROR: Illegal symbol
+00000000                            28  00001012                            28    
+Line 29 ERROR: Illegal symbol
+00000000                            29  00001012                            29  *-------------------------------------------------------------------
+Line 30 ERROR: Illegal symbol
+00000000                            30  00001012                            30  *
+Line 31 ERROR: Illegal symbol
+00000000                            31  00001012                            31  *           GAME LOOP
+Line 32 ERROR: Illegal symbol
+00000000                            32  00001012                            32  *
+Line 33 ERROR: Illegal symbol
+00000000                            33  00001012                            33  *-------------------------------------------------------------------
+Line 34 ERROR: Illegal symbol
+00000000                            34  00001012                            34  
+Line 35 ERROR: Illegal symbol
+00000000                            35  00001012                            35  GAME_LOOP 
+Line 36 ERROR: Illegal symbol
+00000000                            36  00001012  6100 0008                 36         BSR UPDATE
+Line 37 ERROR: Illegal symbol
+00000000                            37  00001016  6100 01EC                 37         BSR RENDER
+Line 38 ERROR: Illegal symbol
+00000000                            38  0000101A                            38      
+Line 39 ERROR: Illegal symbol
+00000000                            39  0000101A  60F6                      39         BRA GAME_LOOP
+Line 40 ERROR: Illegal symbol
+00000000                            40  0000101C                            40         
+Line 41 ERROR: Illegal symbol
+00000000                            41  0000101C                            41         
+Line 42 ERROR: Illegal symbol
+00000000                            42  0000101C                            42  *-------------------------------------------------------------------
+Line 43 ERROR: Illegal symbol
+00000000                            43  0000101C                            43  *
+Line 44 ERROR: Illegal symbol
+00000000                            44  0000101C                            44  *           UPDATE
+Line 45 ERROR: Illegal symbol
+00000000                            45  0000101C                            45  *
+Line 46 ERROR: Illegal symbol
+00000000                            46  0000101C                            46  *-------------------------------------------------------------------
+Line 47 ERROR: Illegal symbol
+00000000                            47  0000101C                            47  UPDATE
+Line 48 ERROR: Illegal symbol
+00000000                            48  0000101C  6100 01C4                 48              BSR GET_MOUSE
+Line 49 ERROR: Illegal symbol
+00000000                            49  00001020  2009                      49              MOVE.L A1, D0
+Line 50 ERROR: Illegal symbol
+00000000                            50  00001022  B07C 0001                 50              CMP #1, D0
+Line 51 ERROR: Illegal symbol
+00000000                            51  00001026  6D00 0006                 51              BLT NO_CLICK
+Line 52 ERROR: Illegal symbol
+00000000                            52  0000102A  6100 0004                 52              BSR HANDLE_CLICK
+Line 53 ERROR: Illegal symbol
+00000000                            53  0000102E                            53  NO_CLICK
+Line 54 ERROR: Illegal symbol
+00000000                            54  0000102E  4E75                      54              RTS
+Line 55 ERROR: Illegal symbol
+00000000                            55  00001030                            55              
+Line 56 ERROR: Illegal symbol
+00000000                            56  00001030                            56  
+Line 57 ERROR: Illegal symbol
+00000000                            57  00001030                            57  *-------------------------------------------------------------------
+Line 58 ERROR: Illegal symbol
+00000000                            58  00001030                            58  *
+Line 59 ERROR: Illegal symbol
+00000000                            59  00001030                            59  *           HANDLE CLICK
+Line 60 ERROR: Illegal symbol
+00000000                            60  00001030                            60  *
+Line 61 ERROR: Illegal symbol
+00000000                            61  00001030                            61  *-------------------------------------------------------------------
+Line 62 ERROR: Illegal symbol
+00000000                            62  00001030                            62  HANDLE_CLICK
+Line 63 ERROR: Illegal symbol
+00000000                            63  00001030  300A                      63              MOVE A2, D0
+Line 64 ERROR: Illegal symbol
+00000000                            64  00001032                            64              
+Line 65 ERROR: Illegal symbol
+00000000                            65  00001032  B07C 0001                 65              CMP #1, D0
+Line 66 ERROR: Illegal symbol
+00000000                            66  00001036  6600 0016                 66              BNE NOT_1
+Line 67 ERROR: Illegal symbol
+00000000                            67  0000103A                            67              * CLICKED 1 IN BUTTONS
+Line 68 ERROR: Illegal symbol
+00000000                            68  0000103A  320C                      68              MOVE A4, D1
+Line 69 ERROR: Illegal symbol
+00000000                            69  0000103C  B27C 0001                 69              CMP #1, D1
+Line 70 ERROR: Illegal symbol
+00000000                            70  00001040  6D00 0008                 70              BLT NO_OP_1
+Line 71 ERROR: Illegal symbol
+00000000                            71  00001044  3A7C 0001                 71              MOVE #1, A5
+Line 72 ERROR: Illegal symbol
+00000000                            72  00001048  4E75                      72              RTS
+Line 73 ERROR: Illegal symbol
+00000000                            73  0000104A                            73  NO_OP_1
+Line 74 ERROR: Illegal symbol
+00000000                            74  0000104A  367C 0001                 74              MOVE #1, A3 
+Line 75 ERROR: Illegal symbol
+00000000                            75  0000104E                            75  NOT_1
+Line 76 ERROR: Illegal symbol
+00000000                            76  0000104E                            76              
+Line 77 ERROR: Illegal symbol
+00000000                            77  0000104E  B07C 0002                 77              CMP #2, D0
+Line 78 ERROR: Illegal symbol
+00000000                            78  00001052  6600 0016                 78              BNE NOT_2
+Line 79 ERROR: Illegal symbol
+00000000                            79  00001056                            79              * CLICKED 2 IN BUTTONS
+Line 80 ERROR: Illegal symbol
+00000000                            80  00001056  320C                      80              MOVE A4, D1
+Line 81 ERROR: Illegal symbol
+00000000                            81  00001058  B27C 0001                 81              CMP #1, D1
+Line 82 ERROR: Illegal symbol
+00000000                            82  0000105C  6D00 0008                 82              BLT NO_OP_2
+Line 83 ERROR: Illegal symbol
+00000000                            83  00001060  3A7C 0002                 83              MOVE #2, A5
+Line 84 ERROR: Illegal symbol
+00000000                            84  00001064  4E75                      84              RTS
+Line 85 ERROR: Illegal symbol
+00000000                            85  00001066                            85  NO_OP_2
+Line 86 ERROR: Illegal symbol
+00000000                            86  00001066  367C 0002                 86              MOVE #2, A3 
+Line 87 ERROR: Illegal symbol
+00000000                            87  0000106A                            87  NOT_2
+Line 88 ERROR: Illegal symbol
+00000000                            88  0000106A                            88  
+Line 89 ERROR: Illegal symbol
+00000000                            89  0000106A  B07C 0003                 89              CMP #3, D0
+Line 90 ERROR: Illegal symbol
+00000000                            90  0000106E  6600 0016                 90              BNE NOT_3
+Line 91 ERROR: Illegal symbol
+00000000                            91  00001072                            91              * CLICKED 3 IN BUTTONS
+Line 92 ERROR: Illegal symbol
+00000000                            92  00001072  320C                      92              MOVE A4, D1
+Line 93 ERROR: Illegal symbol
+00000000                            93  00001074  B27C 0001                 93              CMP #1, D1
+Line 94 ERROR: Illegal symbol
+00000000                            94  00001078  6D00 0008                 94              BLT NO_OP_3
+Line 95 ERROR: Illegal symbol
+00000000                            95  0000107C  3A7C 0003                 95              MOVE #3, A5
+Line 96 ERROR: Illegal symbol
+00000000                            96  00001080  4E75                      96              RTS
+Line 97 ERROR: Illegal symbol
+00000000                            97  00001082                            97  NO_OP_3
+Line 98 ERROR: Illegal symbol
+00000000                            98  00001082  367C 0003                 98              MOVE #3, A3 
+Line 99 ERROR: Illegal symbol
+00000000                            99  00001086                            99  NOT_3
+Line 100 ERROR: Illegal symbol
+00000000                           100  00001086                           100        
+Line 101 ERROR: Illegal symbol
+00000000                           101  00001086                           101              
+Line 102 ERROR: Illegal symbol
+00000000                           102  00001086  B07C 0004                102              CMP #4, D0
+Line 103 ERROR: Illegal symbol
+00000000                           103  0000108A  6600 0016                103              BNE NOT_4
+Line 104 ERROR: Illegal symbol
+00000000                           104  0000108E                           104              * CLICKED 4 IN BUTTONS
+Line 105 ERROR: Illegal symbol
+00000000                           105  0000108E  320C                     105              MOVE A4, D1
+Line 106 ERROR: Illegal symbol
+00000000                           106  00001090  B27C 0001                106              CMP #1, D1
+Line 107 ERROR: Illegal symbol
+00000000                           107  00001094  6D00 0008                107              BLT NO_OP_4
+Line 108 ERROR: Illegal symbol
+00000000                           108  00001098  3A7C 0004                108              MOVE #4, A5
+Line 109 ERROR: Illegal symbol
+00000000                           109  0000109C  4E75                     109              RTS
+Line 110 ERROR: Illegal symbol
+00000000                           110  0000109E                           110  NO_OP_4
+Line 111 ERROR: Illegal symbol
+00000000                           111  0000109E  367C 0004                111              MOVE #4, A3 
+Line 112 ERROR: Illegal symbol
+00000000                           112  000010A2                           112  NOT_4
+Line 113 ERROR: Illegal symbol
+00000000                           113  000010A2                           113  
+Line 114 ERROR: Illegal symbol
+00000000                           114  000010A2  B07C 0005                114              CMP #5, D0
+Line 115 ERROR: Illegal symbol
+00000000                           115  000010A6  6600 0016                115              BNE NOT_5
+Line 116 ERROR: Illegal symbol
+00000000                           116  000010AA                           116              * CLICKED 5 IN BUTTONS
+Line 117 ERROR: Illegal symbol
+00000000                           117  000010AA  320C                     117              MOVE A4, D1
+Line 118 ERROR: Illegal symbol
+00000000                           118  000010AC  B27C 0001                118              CMP #1, D1
+Line 119 ERROR: Illegal symbol
+00000000                           119  000010B0  6D00 0008                119              BLT NO_OP_5
+Line 120 ERROR: Illegal symbol
+00000000                           120  000010B4  3A7C 0005                120              MOVE #5, A5
+Line 121 ERROR: Illegal symbol
+00000000                           121  000010B8  4E75                     121              RTS
+Line 122 ERROR: Illegal symbol
+00000000                           122  000010BA                           122  NO_OP_5
+Line 123 ERROR: Illegal symbol
+00000000                           123  000010BA  367C 0005                123              MOVE #5, A3 
+Line 124 ERROR: Illegal symbol
+00000000                           124  000010BE                           124  NOT_5
+Line 125 ERROR: Illegal symbol
+00000000                           125  000010BE                           125  
+Line 126 ERROR: Illegal symbol
+00000000                           126  000010BE  B07C 0006                126              CMP #6, D0
+Line 127 ERROR: Illegal symbol
+00000000                           127  000010C2  6600 0016                127              BNE NOT_6
+Line 128 ERROR: Illegal symbol
+00000000                           128  000010C6                           128              * CLICKED 6 IN BUTTONS
+Line 129 ERROR: Illegal symbol
+00000000                           129  000010C6  320C                     129              MOVE A4, D1
+Line 130 ERROR: Illegal symbol
+00000000                           130  000010C8  B27C 0001                130              CMP #1, D1
+Line 131 ERROR: Illegal symbol
+00000000                           131  000010CC  6D00 0008                131              BLT NO_OP_6
+Line 132 ERROR: Illegal symbol
+00000000                           132  000010D0  3A7C 0006                132              MOVE #6, A5
+Line 133 ERROR: Illegal symbol
+00000000                           133  000010D4  4E75                     133              RTS
+Line 134 ERROR: Illegal symbol
+00000000                           134  000010D6                           134  NO_OP_6
+Line 135 ERROR: Illegal symbol
+00000000                           135  000010D6  367C 0006                135              MOVE #6, A3 
+Line 136 ERROR: Illegal symbol
+00000000                           136  000010DA                           136  NOT_6
+Line 137 ERROR: Illegal symbol
+00000000                           137  000010DA  B07C 0007                137              CMP #7, D0
+Line 138 ERROR: Illegal symbol
+00000000                           138  000010DE  6600 0016                138              BNE NOT_7
+Line 139 ERROR: Illegal symbol
+00000000                           139  000010E2                           139              * CLICKED 7 IN BUTTONS
+Line 140 ERROR: Illegal symbol
+00000000                           140  000010E2  320C                     140              MOVE A4, D1
+Line 141 ERROR: Illegal symbol
+00000000                           141  000010E4  B27C 0001                141              CMP #1, D1
+Line 142 ERROR: Illegal symbol
+00000000                           142  000010E8  6D00 0008                142              BLT NO_OP_7
+Line 143 ERROR: Illegal symbol
+00000000                           143  000010EC  3A7C 0007                143              MOVE #7, A5
+Line 144 ERROR: Illegal symbol
+00000000                           144  000010F0  4E75                     144              RTS
+Line 145 ERROR: Illegal symbol
+00000000                           145  000010F2                           145  NO_OP_7
+Line 146 ERROR: Illegal symbol
+00000000                           146  000010F2  367C 0007                146              MOVE #7, A3 
+Line 147 ERROR: Illegal symbol
+00000000                           147  000010F6                           147  NOT_7
+Line 148 ERROR: Illegal symbol
+00000000                           148  000010F6                           148  
+Line 149 ERROR: Illegal symbol
+00000000                           149  000010F6  B07C 0008                149              CMP #8, D0
+Line 150 ERROR: Illegal symbol
+00000000                           150  000010FA  6600 0016                150              BNE NOT_8
+Line 151 ERROR: Illegal symbol
+00000000                           151  000010FE                           151              * CLICKED 8 IN BUTTONS
+Line 152 ERROR: Illegal symbol
+00000000                           152  000010FE  320C                     152              MOVE A4, D1
+Line 153 ERROR: Illegal symbol
+00000000                           153  00001100  B27C 0001                153              CMP #1, D1
+Line 154 ERROR: Illegal symbol
+00000000                           154  00001104  6D00 0008                154              BLT NO_OP_8
+Line 155 ERROR: Illegal symbol
+00000000                           155  00001108  3A7C 0008                155              MOVE #8, A5
+Line 156 ERROR: Illegal symbol
+00000000                           156  0000110C  4E75                     156              RTS
+Line 157 ERROR: Illegal symbol
+00000000                           157  0000110E                           157  NO_OP_8
+Line 158 ERROR: Illegal symbol
+00000000                           158  0000110E  367C 0008                158              MOVE #8, A3 
+Line 159 ERROR: Illegal symbol
+00000000                           159  00001112                           159  NOT_8
+Line 160 ERROR: Illegal symbol
+00000000                           160  00001112                           160  
+Line 161 ERROR: Illegal symbol
+00000000                           161  00001112  B07C 0009                161              CMP #9, D0
+Line 162 ERROR: Illegal symbol
+00000000                           162  00001116  6600 0016                162              BNE NOT_9
+Line 163 ERROR: Illegal symbol
+00000000                           163  0000111A                           163              * CLICKED 9 IN BUTTONS
+Line 164 ERROR: Illegal symbol
+00000000                           164  0000111A  320C                     164              MOVE A4, D1
+Line 165 ERROR: Illegal symbol
+00000000                           165  0000111C  B27C 0001                165              CMP #1, D1
+Line 166 ERROR: Illegal symbol
+00000000                           166  00001120  6D00 0008                166              BLT NO_OP_9
+Line 167 ERROR: Illegal symbol
+00000000                           167  00001124  3A7C 0009                167              MOVE #9, A5
+Line 168 ERROR: Illegal symbol
+00000000                           168  00001128  4E75                     168              RTS
+Line 169 ERROR: Illegal symbol
+00000000                           169  0000112A                           169  NO_OP_9
+Line 170 ERROR: Illegal symbol
+00000000                           170  0000112A  367C 0009                170              MOVE #9, A3 
+Line 171 ERROR: Illegal symbol
+00000000                           171  0000112E                           171  NOT_9
+Line 172 ERROR: Illegal symbol
+00000000                           172  0000112E                           172  
+Line 173 ERROR: Illegal symbol
+00000000                           173  0000112E  B07C 000A                173              CMP #10, D0
+Line 174 ERROR: Illegal symbol
+00000000                           174  00001132  6600 0016                174              BNE NOT_0
+Line 175 ERROR: Illegal symbol
+00000000                           175  00001136                           175              * CLICKED 0 IN BUTTONS
+Line 176 ERROR: Illegal symbol
+00000000                           176  00001136  320C                     176              MOVE A4, D1
+Line 177 ERROR: Illegal symbol
+00000000                           177  00001138  B27C 0001                177              CMP #1, D1
+Line 178 ERROR: Illegal symbol
+00000000                           178  0000113C  6D00 0008                178              BLT NO_OP_0
+Line 179 ERROR: Illegal symbol
+00000000                           179  00001140  3A7C 0000                179              MOVE #0, A5
+Line 180 ERROR: Illegal symbol
+00000000                           180  00001144  4E75                     180              RTS
+Line 181 ERROR: Illegal symbol
+00000000                           181  00001146                           181  NO_OP_0
+Line 182 ERROR: Illegal symbol
+00000000                           182  00001146  367C 0000                182              MOVE #0, A3 
+Line 183 ERROR: Illegal symbol
+00000000                           183  0000114A                           183  NOT_0
+Line 184 ERROR: Illegal symbol
+00000000                           184  0000114A                           184  
+Line 185 ERROR: Illegal symbol
+00000000                           185  0000114A                           185  
+Line 186 ERROR: Illegal symbol
+00000000                           186  0000114A                           186  
+Line 187 ERROR: Illegal symbol
+00000000                           187  0000114A  B07C 000B                187              CMP #11, D0
+Line 188 ERROR: Illegal symbol
+00000000                           188  0000114E  6600 0006                188              BNE NOT_11
+Line 189 ERROR: Illegal symbol
+00000000                           189  00001152                           189              * CLICKED MULTIPLICATION IN BUTTONS
+Line 190 ERROR: Illegal symbol
+00000000                           190  00001152  387C 0001                190              MOVE #1, A4
+Line 191 ERROR: Illegal symbol
+00000000                           191  00001156                           191  NOT_11
+Line 192 ERROR: Illegal symbol
+00000000                           192  00001156                           192  
+Line 193 ERROR: Illegal symbol
+00000000                           193  00001156  B07C 000C                193              CMP #12, D0
+Line 194 ERROR: Illegal symbol
+00000000                           194  0000115A  6600 0006                194              BNE NOT_12
+Line 195 ERROR: Illegal symbol
+00000000                           195  0000115E                           195              * CLICKED PLUS IN BUTTONS
+Line 196 ERROR: Illegal symbol
+00000000                           196  0000115E  387C 0002                196              MOVE #2, A4
+Line 197 ERROR: Illegal symbol
+00000000                           197  00001162                           197  NOT_12
+Line 198 ERROR: Illegal symbol
+00000000                           198  00001162                           198  
+Line 199 ERROR: Illegal symbol
+00000000                           199  00001162  B07C 000D                199              CMP #13, D0
+Line 200 ERROR: Illegal symbol
+00000000                           200  00001166  6600 0006                200              BNE NOT_13
+Line 201 ERROR: Illegal symbol
+00000000                           201  0000116A                           201              * CLICKED MINUS IN BUTTONS
+Line 202 ERROR: Illegal symbol
+00000000                           202  0000116A  387C 0003                202              MOVE #3, A4
+Line 203 ERROR: Illegal symbol
+00000000                           203  0000116E                           203  NOT_13
+Line 204 ERROR: Illegal symbol
+00000000                           204  0000116E  B07C 000E                204              CMP #14, D0
+Line 205 ERROR: Illegal symbol
+00000000                           205  00001172  6600 0012                205              BNE NOT_14
+Line 206 ERROR: Illegal symbol
+00000000                           206  00001176                           206              * CLICKED clear IN BUTTONS
+Line 207 ERROR: Illegal symbol
+00000000                           207  00001176  367C 0000                207              MOVE #0, A3
+Line 208 ERROR: Illegal symbol
+00000000                           208  0000117A  387C 0000                208              MOVE #0, A4
+Line 209 ERROR: Illegal symbol
+00000000                           209  0000117E  3A7C 0000                209              MOVE #0, A5
+Line 210 ERROR: Illegal symbol
+00000000                           210  00001182  3C7C 0000                210              MOVE #0, A6
+Line 211 ERROR: Illegal symbol
+00000000                           211  00001186                           211  NOT_14   
+Line 212 ERROR: Illegal symbol
+00000000                           212  00001186  B07C 000F                212              CMP #15, D0
+Line 213 ERROR: Illegal symbol
+00000000                           213  0000118A  6600 0048                213              BNE NOT_15
+Line 214 ERROR: Illegal symbol
+00000000                           214  0000118E                           214              * CLICKED EQUALS IN BUTTONS
+Line 215 ERROR: Illegal symbol
+00000000                           215  0000118E  300C                     215              MOVE A4, D0
+Line 216 ERROR: Illegal symbol
+00000000                           216  00001190  320B                     216              MOVE A3, D1
+Line 217 ERROR: Illegal symbol
+00000000                           217  00001192  340D                     217              MOVE A5, D2
+Line 218 ERROR: Illegal symbol
+00000000                           218  00001194  B07C 0001                218              CMP #1, D0
+Line 219 ERROR: Illegal symbol
+00000000                           219  00001198  6600 000A                219              BNE NOT_MULTIPLY
+Line 220 ERROR: Illegal symbol
+00000000                           220  0000119C  C5C1                     220              MULS D1, D2
+Line 221 ERROR: Illegal symbol
+00000000                           221  0000119E  3C42                     221              MOVE D2, A6
+Line 222 ERROR: Illegal symbol
+00000000                           222  000011A0  6100 0032                222              BSR NOT_15
+Line 223 ERROR: Illegal symbol
+00000000                           223  000011A4                           223  NOT_MULTIPLY
+Line 224 ERROR: Illegal symbol
+00000000                           224  000011A4  B07C 0002                224              CMP #2, D0
+Line 225 ERROR: Illegal symbol
+00000000                           225  000011A8  6600 000A                225              BNE NOT_ADDITION
+Line 226 ERROR: Illegal symbol
+00000000                           226  000011AC  D441                     226              ADD D1, D2
+Line 227 ERROR: Illegal symbol
+00000000                           227  000011AE  3C42                     227              MOVE D2, A6
+Line 228 ERROR: Illegal symbol
+00000000                           228  000011B0  6100 0022                228              BSR NOT_15
+Line 229 ERROR: Illegal symbol
+00000000                           229  000011B4                           229  NOT_ADDITION
+Line 230 ERROR: Illegal symbol
+00000000                           230  000011B4  B07C 0003                230              CMP #3, D0
+Line 231 ERROR: Illegal symbol
+00000000                           231  000011B8  6600 000A                231              BNE NOT_SUBTRACTION
+Line 232 ERROR: Illegal symbol
+00000000                           232  000011BC  9282                     232              SUB.L D2, D1
+Line 233 ERROR: Illegal symbol
+00000000                           233  000011BE  3C42                     233              MOVE D2, A6
+Line 234 ERROR: Illegal symbol
+00000000                           234  000011C0  6100 0012                234              BSR NOT_15
+Line 235 ERROR: Illegal symbol
+00000000                           235  000011C4                           235  NOT_SUBTRACTION
+Line 236 ERROR: Illegal symbol
+00000000                           236  000011C4  B07C 0004                236              CMP #4, D0
+Line 237 ERROR: Illegal symbol
+00000000                           237  000011C8  6600 000A                237              BNE NOT_DIVISION
+Line 238 ERROR: Illegal symbol
+00000000                           238  000011CC  83C2                     238              DIVS D2, D1
+Line 239 ERROR: Illegal symbol
+00000000                           239  000011CE  3C42                     239              MOVE D2, A6
+Line 240 ERROR: Illegal symbol
+00000000                           240  000011D0  6100 0002                240              BSR NOT_15
+Line 241 ERROR: Illegal symbol
+00000000                           241  000011D4                           241  NOT_DIVISION
+Line 242 ERROR: Illegal symbol
+00000000                           242  000011D4                           242  
+Line 243 ERROR: Illegal symbol
+00000000                           243  000011D4                           243  NOT_15
+Line 244 ERROR: Illegal symbol
+00000000                           244  000011D4  B07C 0010                244              CMP #16, D0
+Line 245 ERROR: Illegal symbol
+00000000                           245  000011D8  6600 0006                245              BNE NOT_16
+Line 246 ERROR: Illegal symbol
+00000000                           246  000011DC                           246              * CLICKED DIVISION IN BUTTONS
+Line 247 ERROR: Illegal symbol
+00000000                           247  000011DC  387C 0004                247              MOVE #4, A4
+Line 248 ERROR: Illegal symbol
+00000000                           248  000011E0                           248  NOT_16
+Line 249 ERROR: Illegal symbol
+00000000                           249  000011E0                           249  *            MOVE.L #0000,D1
+Line 250 ERROR: Illegal symbol
+00000000                           250  000011E0                           250  *            MOVE.B #11,D0
+Line 251 ERROR: Illegal symbol
+00000000                           251  000011E0                           251  *            TRAP #15
+Line 252 ERROR: Illegal symbol
+00000000                           252  000011E0                           252  *            
+Line 253 ERROR: Illegal symbol
+00000000                           253  000011E0                           253  *            MOVE #0003, D1
+Line 254 ERROR: Illegal symbol
+00000000                           254  000011E0                           254  **            MOVE.L #128255, D2
+Line 255 ERROR: Illegal symbol
+00000000                           255  000011E0                           255  *            MOVE.B #11, D0
+Line 256 ERROR: Illegal symbol
+00000000                           256  000011E0                           256  *            TRAP #15
+Line 257 ERROR: Illegal symbol
+00000000                           257  000011E0                           257  *            
+Line 258 ERROR: Illegal symbol
+00000000                           258  000011E0                           258  *            MOVE A6, D1
+Line 259 ERROR: Illegal symbol
+00000000                           259  000011E0                           259  *            MOVE.B #6, D3
+Line 260 ERROR: Illegal symbol
+00000000                           260  000011E0                           260  *            MOVE.B #20, D0
+Line 261 ERROR: Illegal symbol
+00000000                           261  000011E0                           261  *            TRAP #15
+Line 262 ERROR: Illegal symbol
+00000000                           262  000011E0                           262              
+Line 263 ERROR: Illegal symbol
+00000000                           263  000011E0                           263  *            MOVE A4, D1
+Line 264 ERROR: Illegal symbol
+00000000                           264  000011E0                           264  *            MOVE.B #20, D3
+Line 265 ERROR: Illegal symbol
+00000000                           265  000011E0                           265  *            MOVE.B #20, D0
+Line 266 ERROR: Illegal symbol
+00000000                           266  000011E0                           266  *            TRAP #15
+Line 267 ERROR: Illegal symbol
+00000000                           267  000011E0                           267  *            
+Line 268 ERROR: Illegal symbol
+00000000                           268  000011E0                           268  *            MOVE A5, D1
+Line 269 ERROR: Illegal symbol
+00000000                           269  000011E0                           269  *            MOVE.B #20, D3
+Line 270 ERROR: Illegal symbol
+00000000                           270  000011E0                           270  *            MOVE.B #20, D0
+Line 271 ERROR: Illegal symbol
+00000000                           271  000011E0                           271  *            TRAP #15
+Line 272 ERROR: Illegal symbol
+00000000                           272  000011E0                           272              
+Line 273 ERROR: Illegal symbol
+00000000                           273  000011E0  4E75                     273              RTS            
+Line 274 ERROR: Illegal symbol
+00000000                           274  000011E2                           274              
+Line 275 ERROR: Illegal symbol
+00000000                           275  000011E2                           275  *-------------------------------------------------------------------
+Line 276 ERROR: Illegal symbol
+00000000                           276  000011E2                           276  *
+Line 277 ERROR: Illegal symbol
+00000000                           277  000011E2                           277  *           get mouse
+Line 278 ERROR: Illegal symbol
+00000000                           278  000011E2                           278  *
+Line 279 ERROR: Illegal symbol
+00000000                           279  000011E2                           279  *-------------------------------------------------------------------
+Line 280 ERROR: Illegal symbol
+00000000                           280  000011E2                           280  GET_MOUSE
+Line 281 ERROR: Illegal symbol
+00000000                           281  000011E2                           281  * CLEARS TEXT FIELDS
+Line 282 ERROR: Illegal symbol
+00000000                           282  000011E2                           282              *MOVE.L #0000,D1
+Line 283 ERROR: Illegal symbol
+00000000                           283  000011E2                           283              *MOVE.B #11,D0
+Line 284 ERROR: Illegal symbol
+00000000                           284  000011E2                           284              *TRAP #15
+Line 285 ERROR: Illegal symbol
+00000000                           285  000011E2                           285              
+Line 286 ERROR: Illegal symbol
+00000000                           286  000011E2  703D                     286              MOVEQ #61, D0
+Line 287 ERROR: Illegal symbol
+00000000                           287  000011E4  123C 0000                287              MOVE.B #0, D1
+Line 288 ERROR: Illegal symbol
+00000000                           288  000011E8  4E4F                     288              TRAP #15 // take in the mouse coordinates
+Line 289 ERROR: Illegal symbol
+00000000                           289  000011EA                           289              
+Line 290 ERROR: Illegal symbol
+00000000                           290  000011EA  2041                     290             MOVE.L D1, A0
+Line 291 ERROR: Illegal symbol
+00000000                           291  000011EC  2200                     291             MOVE.L D0, D1
+Line 292 ERROR: Illegal symbol
+00000000                           292  000011EE  2241                     292             MOVE.L D1, A1
+Line 293 ERROR: Illegal symbol
+00000000                           293  000011F0                           293             * if D1 is not 0, theen button is pressed and d5 = 2
+Line 294 ERROR: Illegal symbol
+00000000                           294  000011F0                           294             *MOVE.B #4,D2
+Line 295 ERROR: Illegal symbol
+00000000                           295  000011F0                           295             *MOVE.B #20,D0
+Line 296 ERROR: Illegal symbol
+00000000                           296  000011F0                           296             *TRAP #15
+Line 297 ERROR: Illegal symbol
+00000000                           297  000011F0                           297              
+Line 298 ERROR: Illegal symbol
+00000000                           298  000011F0                           298             * coords are stored as #YYYY XXXX
+Line 299 ERROR: Illegal symbol
+00000000                           299  000011F0  2208                     299             MOVE.L A0, D1
+Line 300 ERROR: Illegal symbol
+00000000                           300  000011F2  2601                     300             MOVE.L D1,D3
+Line 301 ERROR: Illegal symbol
+00000000                           301  000011F4  C2BC 0000FFFF            301             AND.L #$0000FFFF,D1
+Line 302 ERROR: Illegal symbol
+00000000                           302  000011FA                           302             *MOVE.B #4,D2
+Line 303 ERROR: Illegal symbol
+00000000                           303  000011FA                           303             *MOVE.B #20,D0
+Line 304 ERROR: Illegal symbol
+00000000                           304  000011FA                           304             *TRAP #15
+Line 305 ERROR: Illegal symbol
+00000000                           305  000011FA                           305              
+Line 306 ERROR: Illegal symbol
+00000000                           306  000011FA  7200                     306             MOVE.L #0, D1
+Line 307 ERROR: Illegal symbol
+00000000                           307  000011FC  2203                     307             MOVE.L D3,D1
+Line 308 ERROR: Illegal symbol
+00000000                           308  000011FE  E089                     308             LSR.L #8,D1
+Line 309 ERROR: Illegal symbol
+00000000                           309  00001200  E089                     309             LSR.L #8,D1
+Line 310 ERROR: Illegal symbol
+00000000                           310  00001202                           310             *MOVE.B #6,D2
+Line 311 ERROR: Illegal symbol
+00000000                           311  00001202                           311             *MOVE.B #20,D0
+Line 312 ERROR: Illegal symbol
+00000000                           312  00001202                           312             *TRAP #15
+Line 313 ERROR: Illegal symbol
+00000000                           313  00001202                           313  
+Line 314 ERROR: Illegal symbol
+00000000                           314  00001202                           314              
+Line 315 ERROR: Illegal symbol
+00000000                           315  00001202                           315              
+Line 316 ERROR: Illegal symbol
+00000000                           316  00001202  4E75                     316              RTS
+Line 317 ERROR: Illegal symbol
+00000000                           317  00001204                           317    
+Line 318 ERROR: Illegal symbol
+00000000                           318  00001204                           318  *-------------------------------------------------------------------
+Line 319 ERROR: Illegal symbol
+00000000                           319  00001204                           319  *
+Line 320 ERROR: Illegal symbol
+00000000                           320  00001204                           320  *           Render Loop
+Line 321 ERROR: Illegal symbol
+00000000                           321  00001204                           321  *
+Line 322 ERROR: Illegal symbol
+00000000                           322  00001204                           322  *-------------------------------------------------------------------
+Line 323 ERROR: Illegal symbol
+00000000                           323  00001204                           323  RENDER
+Line 324 ERROR: Illegal symbol
+00000000                           324  00001204                           324      ; enable back buffer
+Line 325 ERROR: Illegal symbol
+00000000                           325  00001204  103C 005E                325      MOVE.B  #94,        D0
+Line 326 ERROR: Illegal symbol
+00000000                           326  00001208  4E4F                     326      TRAP    #15
+Line 327 ERROR: Illegal symbol
+00000000                           327  0000120A                           327      
+Line 328 ERROR: Illegal symbol
+00000000                           328  0000120A  6100 0230                328      BSR DRAW_OUTPUT_FIELD
+Line 329 ERROR: Illegal symbol
+00000000                           329  0000120E                           329      
+Line 330 ERROR: Illegal symbol
+00000000                           330  0000120E  7200                     330      MOVE.L #0000,D1
+Line 331 ERROR: Illegal symbol
+00000000                           331  00001210  103C 000B                331              MOVE.B #11,D0
+Line 332 ERROR: Illegal symbol
+00000000                           332  00001214  4E4F                     332              TRAP #15
+Line 333 ERROR: Illegal symbol
+00000000                           333  00001216                           333              
+Line 334 ERROR: Illegal symbol
+00000000                           334  00001216                           334      
+Line 335 ERROR: Illegal symbol
+00000000                           335  00001216  3209                     335      MOVE A1, D1
+Line 336 ERROR: Illegal symbol
+00000000                           336  00001218  43F9 0000169D            336      LEA ANSWER, A1
+Line 337 ERROR: Illegal symbol
+00000000                           337  0000121E  103C 000E                337      MOVE.B #14, D0
+Line 338 ERROR: Illegal symbol
+00000000                           338  00001222  4E4F                     338      TRAP #15
+Line 339 ERROR: Illegal symbol
+00000000                           339  00001224  3241                     339      MOVE D1, A1
+Line 340 ERROR: Illegal symbol
+00000000                           340  00001226  320E                     340      MOVE A6, D1
+Line 341 ERROR: Illegal symbol
+00000000                           341  00001228  163C 0006                341      MOVE.B #6, D3
+Line 342 ERROR: Illegal symbol
+00000000                           342  0000122C  103C 0014                342      MOVE.B #20, D0
+Line 343 ERROR: Illegal symbol
+00000000                           343  00001230  4E4F                     343      TRAP #15
+Line 344 ERROR: Illegal symbol
+00000000                           344  00001232                           344      
+Line 345 ERROR: Illegal symbol
+00000000                           345  00001232  347C 0000                345      MOVE #0, A2
+Line 346 ERROR: Illegal symbol
+00000000                           346  00001236                           346      
+Line 347 ERROR: Illegal symbol
+00000000                           347  00001236                           347      ; first line of buttons
+Line 348 ERROR: Illegal symbol
+00000000                           348  00001236  3C3C 0000                348      MOVE #0,D6
+Line 349 ERROR: Illegal symbol
+00000000                           349  0000123A  3E3C 0000                349      MOVE #0,D7
+Line 350 ERROR: Illegal symbol
+00000000                           350  0000123E  6100 0284                350      BSR CHECK_MOUSE
+Line 351 ERROR: Illegal symbol
+00000000                           351  00001242  6100 0230                351      BSR DRAW_BUTTON
+Line 352 ERROR: Illegal symbol
+00000000                           352  00001246                           352      
+Line 353 ERROR: Illegal symbol
+00000000                           353  00001246  BA7C 0000                353      CMP #0, D5
+Line 354 ERROR: Illegal symbol
+00000000                           354  0000124A  6700 0006                354      BEQ CONTINUE7
+Line 355 ERROR: Illegal symbol
+00000000                           355  0000124E  347C 0007                355      MOVE #7, A2
+Line 356 ERROR: Illegal symbol
+00000000                           356  00001252                           356  CONTINUE7
+Line 357 ERROR: Illegal symbol
+00000000                           357  00001252  3A3C 0000                357      MOVE #0,D5
+Line 358 ERROR: Illegal symbol
+00000000                           358  00001256                           358      
+Line 359 ERROR: Illegal symbol
+00000000                           359  00001256  3C3C 00A0                359      MOVE #160,D6
+Line 360 ERROR: Illegal symbol
+00000000                           360  0000125A  3E3C 0000                360      MOVE #0,D7
+Line 361 ERROR: Illegal symbol
+00000000                           361  0000125E  6100 0264                361      BSR CHECK_MOUSE
+Line 362 ERROR: Illegal symbol
+00000000                           362  00001262  6100 0210                362      BSR DRAW_BUTTON
+Line 363 ERROR: Illegal symbol
+00000000                           363  00001266                           363      
+Line 364 ERROR: Illegal symbol
+00000000                           364  00001266  BA7C 0000                364      CMP #0, D5
+Line 365 ERROR: Illegal symbol
+00000000                           365  0000126A  6700 0006                365      BEQ CONTINUE8
+Line 366 ERROR: Illegal symbol
+00000000                           366  0000126E  347C 0008                366      MOVE #8, A2
+Line 367 ERROR: Illegal symbol
+00000000                           367  00001272                           367  CONTINUE8
+Line 368 ERROR: Illegal symbol
+00000000                           368  00001272  3A3C 0000                368      MOVE #0,D5
+Line 369 ERROR: Illegal symbol
+00000000                           369  00001276                           369      
+Line 370 ERROR: Illegal symbol
+00000000                           370  00001276                           370  
+Line 371 ERROR: Illegal symbol
+00000000                           371  00001276  3C3C 0140                371      MOVE #320,D6
+Line 372 ERROR: Illegal symbol
+00000000                           372  0000127A  3E3C 0000                372      MOVE #0,D7
+Line 373 ERROR: Illegal symbol
+00000000                           373  0000127E  6100 0244                373      BSR CHECK_MOUSE
+Line 374 ERROR: Illegal symbol
+00000000                           374  00001282  6100 01F0                374      BSR DRAW_BUTTON
+Line 375 ERROR: Illegal symbol
+00000000                           375  00001286                           375      
+Line 376 ERROR: Illegal symbol
+00000000                           376  00001286  BA7C 0000                376      CMP #0, D5
+Line 377 ERROR: Illegal symbol
+00000000                           377  0000128A  6700 0006                377      BEQ CONTINUE9
+Line 378 ERROR: Illegal symbol
+00000000                           378  0000128E  347C 0009                378      MOVE #9, A2
+Line 379 ERROR: Illegal symbol
+00000000                           379  00001292                           379  CONTINUE9
+Line 380 ERROR: Illegal symbol
+00000000                           380  00001292  3A3C 0000                380      MOVE #0,D5
+Line 381 ERROR: Illegal symbol
+00000000                           381  00001296                           381      
+Line 382 ERROR: Illegal symbol
+00000000                           382  00001296                           382  
+Line 383 ERROR: Illegal symbol
+00000000                           383  00001296  3C3C 01E0                383      MOVE #480,D6
+Line 384 ERROR: Illegal symbol
+00000000                           384  0000129A  3E3C 0000                384      MOVE #0,D7
+Line 385 ERROR: Illegal symbol
+00000000                           385  0000129E  6100 0224                385      BSR CHECK_MOUSE
+Line 386 ERROR: Illegal symbol
+00000000                           386  000012A2  6100 01D0                386      BSR DRAW_BUTTON
+Line 387 ERROR: Illegal symbol
+00000000                           387  000012A6                           387      
+Line 388 ERROR: Illegal symbol
+00000000                           388  000012A6  BA7C 0000                388      CMP #0, D5
+Line 389 ERROR: Illegal symbol
+00000000                           389  000012AA  6700 0006                389      BEQ CONTINUE11
+Line 390 ERROR: Illegal symbol
+00000000                           390  000012AE  347C 000B                390      MOVE #11, A2
+Line 391 ERROR: Illegal symbol
+00000000                           391  000012B2                           391  CONTINUE11
+Line 392 ERROR: Illegal symbol
+00000000                           392  000012B2  3A3C 0000                392      MOVE #0,D5
+Line 393 ERROR: Illegal symbol
+00000000                           393  000012B6                           393      
+Line 394 ERROR: Illegal symbol
+00000000                           394  000012B6                           394  
+Line 395 ERROR: Illegal symbol
+00000000                           395  000012B6                           395      
+Line 396 ERROR: Illegal symbol
+00000000                           396  000012B6                           396      ; SECOND LINE OF BUTTONS
+Line 397 ERROR: Illegal symbol
+00000000                           397  000012B6  3C3C 0000                397      MOVE #0,D6
+Line 398 ERROR: Illegal symbol
+00000000                           398  000012BA  3E3C 0064                398      MOVE #100,D7
+Line 399 ERROR: Illegal symbol
+00000000                           399  000012BE  6100 0204                399      BSR CHECK_MOUSE
+Line 400 ERROR: Illegal symbol
+00000000                           400  000012C2  6100 01B0                400      BSR DRAW_BUTTON
+Line 401 ERROR: Illegal symbol
+00000000                           401  000012C6                           401      
+Line 402 ERROR: Illegal symbol
+00000000                           402  000012C6  BA7C 0000                402      CMP #0, D5
+Line 403 ERROR: Illegal symbol
+00000000                           403  000012CA  6700 0006                403      BEQ CONTINUE4
+Line 404 ERROR: Illegal symbol
+00000000                           404  000012CE  347C 0004                404      MOVE #4, A2
+Line 405 ERROR: Illegal symbol
+00000000                           405  000012D2                           405  CONTINUE4
+Line 406 ERROR: Illegal symbol
+00000000                           406  000012D2  3A3C 0000                406      MOVE #0,D5
+Line 407 ERROR: Illegal symbol
+00000000                           407  000012D6                           407      
+Line 408 ERROR: Illegal symbol
+00000000                           408  000012D6                           408  
+Line 409 ERROR: Illegal symbol
+00000000                           409  000012D6  3C3C 00A0                409      MOVE #160,D6
+Line 410 ERROR: Illegal symbol
+00000000                           410  000012DA  3E3C 0064                410      MOVE #100,D7
+Line 411 ERROR: Illegal symbol
+00000000                           411  000012DE  6100 01E4                411      BSR CHECK_MOUSE
+Line 412 ERROR: Illegal symbol
+00000000                           412  000012E2  6100 0190                412      BSR DRAW_BUTTON
+Line 413 ERROR: Illegal symbol
+00000000                           413  000012E6                           413      
+Line 414 ERROR: Illegal symbol
+00000000                           414  000012E6  BA7C 0000                414      CMP #0, D5
+Line 415 ERROR: Illegal symbol
+00000000                           415  000012EA  6700 0006                415      BEQ CONTINUE5
+Line 416 ERROR: Illegal symbol
+00000000                           416  000012EE  347C 0005                416      MOVE #5, A2
+Line 417 ERROR: Illegal symbol
+00000000                           417  000012F2                           417  CONTINUE5
+Line 418 ERROR: Illegal symbol
+00000000                           418  000012F2  3A3C 0000                418      MOVE #0,D5
+Line 419 ERROR: Illegal symbol
+00000000                           419  000012F6                           419      
+Line 420 ERROR: Illegal symbol
+00000000                           420  000012F6                           420  
+Line 421 ERROR: Illegal symbol
+00000000                           421  000012F6  3C3C 0140                421      MOVE #320,D6
+Line 422 ERROR: Illegal symbol
+00000000                           422  000012FA  3E3C 0064                422      MOVE #100,D7    
+Line 423 ERROR: Illegal symbol
+00000000                           423  000012FE  6100 01C4                423      BSR CHECK_MOUSE
+Line 424 ERROR: Illegal symbol
+00000000                           424  00001302  6100 0170                424      BSR DRAW_BUTTON
+Line 425 ERROR: Illegal symbol
+00000000                           425  00001306                           425      
+Line 426 ERROR: Illegal symbol
+00000000                           426  00001306  BA7C 0000                426      CMP #0, D5
+Line 427 ERROR: Illegal symbol
+00000000                           427  0000130A  6700 0006                427      BEQ CONTINUE6
+Line 428 ERROR: Illegal symbol
+00000000                           428  0000130E  347C 0006                428      MOVE #6, A2
+Line 429 ERROR: Illegal symbol
+00000000                           429  00001312                           429  CONTINUE6
+Line 430 ERROR: Illegal symbol
+00000000                           430  00001312  3A3C 0000                430      MOVE #0,D5
+Line 431 ERROR: Illegal symbol
+00000000                           431  00001316                           431      
+Line 432 ERROR: Illegal symbol
+00000000                           432  00001316                           432  
+Line 433 ERROR: Illegal symbol
+00000000                           433  00001316  3C3C 01E0                433      MOVE #480,D6
+Line 434 ERROR: Illegal symbol
+00000000                           434  0000131A  3E3C 0064                434      MOVE #100,D7
+Line 435 ERROR: Illegal symbol
+00000000                           435  0000131E  6100 01A4                435      BSR CHECK_MOUSE
+Line 436 ERROR: Illegal symbol
+00000000                           436  00001322  6100 0150                436      BSR DRAW_BUTTON
+Line 437 ERROR: Illegal symbol
+00000000                           437  00001326                           437      
+Line 438 ERROR: Illegal symbol
+00000000                           438  00001326  BA7C 0000                438      CMP #0, D5
+Line 439 ERROR: Illegal symbol
+00000000                           439  0000132A  6700 0006                439      BEQ CONTINUE12
+Line 440 ERROR: Illegal symbol
+00000000                           440  0000132E  347C 000C                440      MOVE #12, A2
+Line 441 ERROR: Illegal symbol
+00000000                           441  00001332                           441  CONTINUE12
+Line 442 ERROR: Illegal symbol
+00000000                           442  00001332  3A3C 0000                442      MOVE #0,D5
+Line 443 ERROR: Illegal symbol
+00000000                           443  00001336                           443      
+Line 444 ERROR: Illegal symbol
+00000000                           444  00001336                           444  
+Line 445 ERROR: Illegal symbol
+00000000                           445  00001336                           445      
+Line 446 ERROR: Illegal symbol
+00000000                           446  00001336                           446      ; THIRD LINE OF BUTTONS
+Line 447 ERROR: Illegal symbol
+00000000                           447  00001336  3C3C 0000                447      MOVE #0,D6
+Line 448 ERROR: Illegal symbol
+00000000                           448  0000133A  3E3C 00C8                448      MOVE #200,D7
+Line 449 ERROR: Illegal symbol
+00000000                           449  0000133E  6100 0184                449      BSR CHECK_MOUSE
+Line 450 ERROR: Illegal symbol
+00000000                           450  00001342  6100 0130                450      BSR DRAW_BUTTON
+Line 451 ERROR: Illegal symbol
+00000000                           451  00001346                           451      
+Line 452 ERROR: Illegal symbol
+00000000                           452  00001346  BA7C 0000                452      CMP #0, D5
+Line 453 ERROR: Illegal symbol
+00000000                           453  0000134A  6700 0006                453      BEQ CONTINUE1
+Line 454 ERROR: Illegal symbol
+00000000                           454  0000134E  347C 0001                454      MOVE #1, A2
+Line 455 ERROR: Illegal symbol
+00000000                           455  00001352                           455  CONTINUE1
+Line 456 ERROR: Illegal symbol
+00000000                           456  00001352  3A3C 0000                456      MOVE #0,D5
+Line 457 ERROR: Illegal symbol
+00000000                           457  00001356                           457      
+Line 458 ERROR: Illegal symbol
+00000000                           458  00001356                           458  
+Line 459 ERROR: Illegal symbol
+00000000                           459  00001356  3C3C 00A0                459      MOVE #160,D6
+Line 460 ERROR: Illegal symbol
+00000000                           460  0000135A  3E3C 00C8                460      MOVE #200,D7
+Line 461 ERROR: Illegal symbol
+00000000                           461  0000135E  6100 0164                461      BSR CHECK_MOUSE
+Line 462 ERROR: Illegal symbol
+00000000                           462  00001362  6100 0110                462      BSR DRAW_BUTTON
+Line 463 ERROR: Illegal symbol
+00000000                           463  00001366                           463      
+Line 464 ERROR: Illegal symbol
+00000000                           464  00001366  BA7C 0000                464      CMP #0, D5
+Line 465 ERROR: Illegal symbol
+00000000                           465  0000136A  6700 0006                465      BEQ CONTINUE2
+Line 466 ERROR: Illegal symbol
+00000000                           466  0000136E  347C 0002                466      MOVE #2, A2
+Line 467 ERROR: Illegal symbol
+00000000                           467  00001372                           467  CONTINUE2
+Line 468 ERROR: Illegal symbol
+00000000                           468  00001372  3A3C 0000                468      MOVE #0,D5
+Line 469 ERROR: Illegal symbol
+00000000                           469  00001376                           469      
+Line 470 ERROR: Illegal symbol
+00000000                           470  00001376                           470  
+Line 471 ERROR: Illegal symbol
+00000000                           471  00001376  3C3C 0140                471      MOVE #320,D6
+Line 472 ERROR: Illegal symbol
+00000000                           472  0000137A  3E3C 00C8                472      MOVE #200,D7
+Line 473 ERROR: Illegal symbol
+00000000                           473  0000137E  6100 0144                473      BSR CHECK_MOUSE
+Line 474 ERROR: Illegal symbol
+00000000                           474  00001382  6100 00F0                474      BSR DRAW_BUTTON
+Line 475 ERROR: Illegal symbol
+00000000                           475  00001386                           475      
+Line 476 ERROR: Illegal symbol
+00000000                           476  00001386  BA7C 0000                476       CMP #0, D5
+Line 477 ERROR: Illegal symbol
+00000000                           477  0000138A  6700 0006                477      BEQ CONTINUE3
+Line 478 ERROR: Illegal symbol
+00000000                           478  0000138E  347C 0003                478      MOVE #3, A2
+Line 479 ERROR: Illegal symbol
+00000000                           479  00001392                           479  CONTINUE3
+Line 480 ERROR: Illegal symbol
+00000000                           480  00001392  3A3C 0000                480      MOVE #0,D5
+Line 481 ERROR: Illegal symbol
+00000000                           481  00001396                           481      
+Line 482 ERROR: Illegal symbol
+00000000                           482  00001396                           482  
+Line 483 ERROR: Illegal symbol
+00000000                           483  00001396  3C3C 01E0                483      MOVE #480,D6
+Line 484 ERROR: Illegal symbol
+00000000                           484  0000139A  3E3C 00C8                484      MOVE #200,D7
+Line 485 ERROR: Illegal symbol
+00000000                           485  0000139E  6100 0124                485      BSR CHECK_MOUSE
+Line 486 ERROR: Illegal symbol
+00000000                           486  000013A2  6100 00D0                486      BSR DRAW_BUTTON
+Line 487 ERROR: Illegal symbol
+00000000                           487  000013A6                           487      
+Line 488 ERROR: Illegal symbol
+00000000                           488  000013A6  BA7C 0000                488      CMP #0, D5
+Line 489 ERROR: Illegal symbol
+00000000                           489  000013AA  6700 0006                489      BEQ CONTINUE13
+Line 490 ERROR: Illegal symbol
+00000000                           490  000013AE  347C 000D                490      MOVE #13, A2
+Line 491 ERROR: Illegal symbol
+00000000                           491  000013B2                           491  CONTINUE13
+Line 492 ERROR: Illegal symbol
+00000000                           492  000013B2  3A3C 0000                492      MOVE #0,D5
+Line 493 ERROR: Illegal symbol
+00000000                           493  000013B6                           493      
+Line 494 ERROR: Illegal symbol
+00000000                           494  000013B6                           494  
+Line 495 ERROR: Illegal symbol
+00000000                           495  000013B6                           495      
+Line 496 ERROR: Illegal symbol
+00000000                           496  000013B6                           496      ; FOURTH LINE OF BUTTONS
+Line 497 ERROR: Illegal symbol
+00000000                           497  000013B6  3C3C 0000                497      MOVE #0,D6
+Line 498 ERROR: Illegal symbol
+00000000                           498  000013BA  3E3C 012C                498      MOVE #300,D7
+Line 499 ERROR: Illegal symbol
+00000000                           499  000013BE  6100 0104                499      BSR CHECK_MOUSE
+Line 500 ERROR: Illegal symbol
+00000000                           500  000013C2  6100 00B0                500      BSR DRAW_BUTTON
+Line 501 ERROR: Illegal symbol
+00000000                           501  000013C6                           501      
+Line 502 ERROR: Illegal symbol
+00000000                           502  000013C6  BA7C 0000                502      CMP #0, D5
+Line 503 ERROR: Illegal symbol
+00000000                           503  000013CA  6700 0006                503      BEQ CONTINUE10
+Line 504 ERROR: Illegal symbol
+00000000                           504  000013CE  347C 000A                504      MOVE #10, A2
+Line 505 ERROR: Illegal symbol
+00000000                           505  000013D2                           505  CONTINUE10
+Line 506 ERROR: Illegal symbol
+00000000                           506  000013D2  3A3C 0000                506      MOVE #0,D5
+Line 507 ERROR: Illegal symbol
+00000000                           507  000013D6                           507      
+Line 508 ERROR: Illegal symbol
+00000000                           508  000013D6                           508  
+Line 509 ERROR: Illegal symbol
+00000000                           509  000013D6  3C3C 00A0                509      MOVE #160,D6
+Line 510 ERROR: Illegal symbol
+00000000                           510  000013DA  3E3C 012C                510      MOVE #300,D7
+Line 511 ERROR: Illegal symbol
+00000000                           511  000013DE  6100 00E4                511      BSR CHECK_MOUSE
+Line 512 ERROR: Illegal symbol
+00000000                           512  000013E2  6100 0090                512      BSR DRAW_BUTTON
+Line 513 ERROR: Illegal symbol
+00000000                           513  000013E6                           513      
+Line 514 ERROR: Illegal symbol
+00000000                           514  000013E6  BA7C 0000                514      CMP #0, D5
+Line 515 ERROR: Illegal symbol
+00000000                           515  000013EA  6700 0006                515      BEQ CONTINUE14
+Line 516 ERROR: Illegal symbol
+00000000                           516  000013EE  347C 000E                516      MOVE #14, A2
+Line 517 ERROR: Illegal symbol
+00000000                           517  000013F2                           517  CONTINUE14
+Line 518 ERROR: Illegal symbol
+00000000                           518  000013F2  3A3C 0000                518      MOVE #0,D5
+Line 519 ERROR: Illegal symbol
+00000000                           519  000013F6                           519      
+Line 520 ERROR: Illegal symbol
+00000000                           520  000013F6                           520  
+Line 521 ERROR: Illegal symbol
+00000000                           521  000013F6  3C3C 0140                521      MOVE #320,D6
+Line 522 ERROR: Illegal symbol
+00000000                           522  000013FA  3E3C 012C                522      MOVE #300,D7
+Line 523 ERROR: Illegal symbol
+00000000                           523  000013FE  6100 00C4                523      BSR CHECK_MOUSE
+Line 524 ERROR: Illegal symbol
+00000000                           524  00001402  6100 0070                524      BSR DRAW_BUTTON
+Line 525 ERROR: Illegal symbol
+00000000                           525  00001406                           525      
+Line 526 ERROR: Illegal symbol
+00000000                           526  00001406  BA7C 0000                526      CMP #0, D5
+Line 527 ERROR: Illegal symbol
+00000000                           527  0000140A  6700 0006                527      BEQ CONTINUE15
+Line 528 ERROR: Illegal symbol
+00000000                           528  0000140E  347C 000F                528      MOVE #15, A2
+Line 529 ERROR: Illegal symbol
+00000000                           529  00001412                           529  CONTINUE15
+Line 530 ERROR: Illegal symbol
+00000000                           530  00001412  3A3C 0000                530      MOVE #0,D5
+Line 531 ERROR: Illegal symbol
+00000000                           531  00001416                           531      
+Line 532 ERROR: Illegal symbol
+00000000                           532  00001416                           532  
+Line 533 ERROR: Illegal symbol
+00000000                           533  00001416                           533      
+Line 534 ERROR: Illegal symbol
+00000000                           534  00001416  3C3C 01E0                534      MOVE #480,D6
+Line 535 ERROR: Illegal symbol
+00000000                           535  0000141A  3E3C 012C                535      MOVE #300,D7
+Line 536 ERROR: Illegal symbol
+00000000                           536  0000141E  6100 00A4                536      BSR CHECK_MOUSE
+Line 537 ERROR: Illegal symbol
+00000000                           537  00001422  6100 0050                537      BSR DRAW_BUTTON
+Line 538 ERROR: Illegal symbol
+00000000                           538  00001426                           538      
+Line 539 ERROR: Illegal symbol
+00000000                           539  00001426  BA7C 0000                539      CMP #0, D5
+Line 540 ERROR: Illegal symbol
+00000000                           540  0000142A  6700 0006                540      BEQ CONTINUE16
+Line 541 ERROR: Illegal symbol
+00000000                           541  0000142E  347C 0010                541      MOVE #16, A2
+Line 542 ERROR: Illegal symbol
+00000000                           542  00001432                           542  CONTINUE16
+Line 543 ERROR: Illegal symbol
+00000000                           543  00001432  3A3C 0000                543      MOVE #0,D5
+Line 544 ERROR: Illegal symbol
+00000000                           544  00001436                           544      
+Line 545 ERROR: Illegal symbol
+00000000                           545  00001436                           545  
+Line 546 ERROR: Illegal symbol
+00000000                           546  00001436  6100 00DE                546              BSR DRAW_BUTTON_TEXT
+Line 547 ERROR: Illegal symbol
+00000000                           547  0000143A                           547      
+Line 548 ERROR: Illegal symbol
+00000000                           548  0000143A  4E75                     548      RTS
+Line 549 ERROR: Illegal symbol
+00000000                           549  0000143C                           549  
+Line 550 ERROR: Illegal symbol
+00000000                           550  0000143C                           550  
+Line 551 ERROR: Illegal symbol
+00000000                           551  0000143C                           551  *-------------------------------------------------------------------
+Line 552 ERROR: Illegal symbol
+00000000                           552  0000143C                           552  *
+Line 553 ERROR: Illegal symbol
+00000000                           553  0000143C                           553  *           draw output field
+Line 554 ERROR: Illegal symbol
+00000000                           554  0000143C                           554  *
+Line 555 ERROR: Illegal symbol
+00000000                           555  0000143C                           555  *-------------------------------------------------------------------
+Line 556 ERROR: Illegal symbol
+00000000                           556  0000143C                           556  DRAW_OUTPUT_FIELD
+Line 557 ERROR: Illegal symbol
+00000000                           557  0000143C                           557      ; SET PEN STYLE
+Line 558 ERROR: Illegal symbol
+00000000                           558  0000143C  223C 00FFFFFF            558      MOVE.L  #WHITE,     D1          ; Set PEN color
+Line 559 ERROR: Illegal symbol
+00000000                           559  00001442  103C 0050                559      MOVE.B  #NORMAL_PEN,     D0     ; SET PEN DRAW TYPE
+Line 560 ERROR: Illegal symbol
+00000000                           560  00001446  4E4F                     560      TRAP    #15                     ; Trap (Perform action)
+Line 561 ERROR: Illegal symbol
+00000000                           561  00001448                           561    
+Line 562 ERROR: Illegal symbol
+00000000                           562  00001448                           562     ; Set X, Y, Width and Height
+Line 563 ERROR: Illegal symbol
+00000000                           563  00001448  223C 00000014            563     MOVE.L  #OUTPUT_POS_X,   D1      ; X START POS
+Line 564 ERROR: Illegal symbol
+00000000                           564  0000144E  243C 00000014            564     MOVE.L  #OUTPUT_POS_Y,   D2      ; Y START POS
+Line 565 ERROR: Illegal symbol
+00000000                           565  00001454                           565      
+Line 566 ERROR: Illegal symbol
+00000000                           566  00001454  263C 00000014            566     MOVE.L  #OUTPUT_POS_X,   D3
+Line 567 ERROR: Illegal symbol
+00000000                           567  0000145A  0683 00000258            567     ADD.L   #OUTPUT_WIDTH,   D3      ; Width  (STARTPOSX + WIDTH)
+Line 568 ERROR: Illegal symbol
+00000000                           568  00001460  283C 00000014            568     MOVE.L  #OUTPUT_POS_Y,   D4 
+Line 569 ERROR: Illegal symbol
+00000000                           569  00001466  0684 00000050            569     ADD.L   #OUTPUT_HEIGHT,  D4     ; Height (STARTPOSY + HEIGHT)
+Line 570 ERROR: Illegal symbol
+00000000                           570  0000146C                           570       
+Line 571 ERROR: Illegal symbol
+00000000                           571  0000146C                           571     ; Draw FIELD
+Line 572 ERROR: Illegal symbol
+00000000                           572  0000146C  103C 0057                572     MOVE.B  #PEN_DRAW,        D0    ; Draw queued pen
+Line 573 ERROR: Illegal symbol
+00000000                           573  00001470  4E4F                     573     TRAP    #15                     ; Trap (Perform action)
+Line 574 ERROR: Illegal symbol
+00000000                           574  00001472                           574      
+Line 575 ERROR: Illegal symbol
+00000000                           575  00001472  4E75                     575     RTS  
+Line 576 ERROR: Illegal symbol
+00000000                           576  00001474                           576   
+Line 577 ERROR: Illegal symbol
+00000000                           577  00001474                           577  *-------------------------------------------------------------------
+Line 578 ERROR: Illegal symbol
+00000000                           578  00001474                           578  *
+Line 579 ERROR: Illegal symbol
+00000000                           579  00001474                           579  *           DRAW BUTTON
+Line 580 ERROR: Illegal symbol
+00000000                           580  00001474                           580  *
+Line 581 ERROR: Illegal symbol
+00000000                           581  00001474                           581  *-------------------------------------------------------------------
+Line 582 ERROR: Illegal symbol
+00000000                           582  00001474                           582  DRAW_BUTTON
+Line 583 ERROR: Illegal symbol
+00000000                           583  00001474                           583      ; SET PEN STYLE
+Line 584 ERROR: Illegal symbol
+00000000                           584  00001474  223C 00FFFFFF            584      MOVE.L  #WHITE,     D1          ; Set PEN color
+Line 585 ERROR: Illegal symbol
+00000000                           585  0000147A  BA7C 0001                585      CMP #1, D5
+Line 586 ERROR: Illegal symbol
+00000000                           586  0000147E  6600 0008                586      BNE NOT_YELLOW
+Line 587 ERROR: Illegal symbol
+00000000                           587  00001482                           587  
+Line 588 ERROR: Illegal symbol
+00000000                           588  00001482  223C 0000FFFF            588      MOVE.L  #YELLOW,     D1  
+Line 589 ERROR: Illegal symbol
+00000000                           589  00001488                           589      
+Line 590 ERROR: Illegal symbol
+00000000                           590  00001488                           590      
+Line 591 ERROR: Illegal symbol
+00000000                           591  00001488                           591  NOT_YELLOW
+Line 592 ERROR: Illegal symbol
+00000000                           592  00001488  BA7C 0002                592      CMP #2, D5
+Line 593 ERROR: Illegal symbol
+00000000                           593  0000148C  6600 0008                593      BNE NOT_BLUE
+Line 594 ERROR: Illegal symbol
+00000000                           594  00001490  223C 00FF0000            594      MOVE.L #BLUE, D1
+Line 595 ERROR: Illegal symbol
+00000000                           595  00001496                           595      
+Line 596 ERROR: Illegal symbol
+00000000                           596  00001496                           596  NOT_BLUE
+Line 597 ERROR: Illegal symbol
+00000000                           597  00001496  103C 0050                597      MOVE.B  #NORMAL_PEN,     D0     ; SET PEN DRAW TYPE
+Line 598 ERROR: Illegal symbol
+00000000                           598  0000149A  4E4F                     598      TRAP    #15                     ; Trap (Perform action)
+Line 599 ERROR: Illegal symbol
+00000000                           599  0000149C                           599    
+Line 600 ERROR: Illegal symbol
+00000000                           600  0000149C                           600     ; Set X, Y, Width and Height
+Line 601 ERROR: Illegal symbol
+00000000                           601  0000149C  2206                     601     MOVE.L D6, D1
+Line 602 ERROR: Illegal symbol
+00000000                           602  0000149E  2407                     602     MOVE.L D7, D2
+Line 603 ERROR: Illegal symbol
+00000000                           603  000014A0  0681 00000014            603     ADD.L   #BUTTON1_POS_X,   D1      ; X START POS
+Line 604 ERROR: Illegal symbol
+00000000                           604  000014A6  0682 00000078            604     ADD.L   #BUTTON1_POS_Y,   D2      ; Y START POS
+Line 605 ERROR: Illegal symbol
+00000000                           605  000014AC                           605     
+Line 606 ERROR: Illegal symbol
+00000000                           606  000014AC  2601                     606     MOVE.L  D1,   D3
+Line 607 ERROR: Illegal symbol
+00000000                           607  000014AE                           607     
+Line 608 ERROR: Illegal symbol
+00000000                           608  000014AE  0683 00000078            608     ADD.L   #BUTTON1_WIDTH,   D3      ; Width  (STARTPOSX + WIDTH)
+Line 609 ERROR: Illegal symbol
+00000000                           609  000014B4  2802                     609     MOVE.L  D2,   D4 
+Line 610 ERROR: Illegal symbol
+00000000                           610  000014B6  0684 00000050            610     ADD.L   #BUTTON1_HEIGHT,  D4     ; Height (STARTPOSY + HEIGHT)
+Line 611 ERROR: Illegal symbol
+00000000                           611  000014BC                           611       
+Line 612 ERROR: Illegal symbol
+00000000                           612  000014BC                           612     ; Draw FIELD
+Line 613 ERROR: Illegal symbol
+00000000                           613  000014BC  103C 0057                613     MOVE.B  #PEN_DRAW,        D0    ; Draw queued pen
+Line 614 ERROR: Illegal symbol
+00000000                           614  000014C0  4E4F                     614     TRAP    #15                     ; Trap (Perform action)
+Line 615 ERROR: Illegal symbol
+00000000                           615  000014C2                           615      
+Line 616 ERROR: Illegal symbol
+00000000                           616  000014C2  4E75                     616     RTS  
+Line 617 ERROR: Illegal symbol
+00000000                           617  000014C4                           617  
+Line 618 ERROR: Illegal symbol
+00000000                           618  000014C4                           618  
+Line 619 ERROR: Illegal symbol
+00000000                           619  000014C4                           619  *-------------------------------------------------------------------
+Line 620 ERROR: Illegal symbol
+00000000                           620  000014C4                           620  *
+Line 621 ERROR: Illegal symbol
+00000000                           621  000014C4                           621  *           Check mouse
+Line 622 ERROR: Illegal symbol
+00000000                           622  000014C4                           622  *
+Line 623 ERROR: Illegal symbol
+00000000                           623  000014C4                           623  *-------------------------------------------------------------------
+Line 624 ERROR: Illegal symbol
+00000000                           624  000014C4                           624  CHECK_MOUSE
+Line 625 ERROR: Illegal symbol
+00000000                           625  000014C4                           625     * SET X BUTTON POSITION
+Line 626 ERROR: Illegal symbol
+00000000                           626  000014C4  2206                     626     MOVE.L D6, D1
+Line 627 ERROR: Illegal symbol
+00000000                           627  000014C6  0681 00000014            627     ADD.L #BUTTON1_POS_X,   D1
+Line 628 ERROR: Illegal symbol
+00000000                           628  000014CC                           628     
+Line 629 ERROR: Illegal symbol
+00000000                           629  000014CC                           629     * SET X MOUSE COORDINATES INTO D3
+Line 630 ERROR: Illegal symbol
+00000000                           630  000014CC  2608                     630     MOVE.L A0,D3
+Line 631 ERROR: Illegal symbol
+00000000                           631  000014CE  C6BC 0000FFFF            631     AND.L #$0000FFFF,D3
+Line 632 ERROR: Illegal symbol
+00000000                           632  000014D4                           632  
+Line 633 ERROR: Illegal symbol
+00000000                           633  000014D4                           633     * CHECK X COORDS ARE WITHIN BOX
+Line 634 ERROR: Illegal symbol
+00000000                           634  000014D4  B243                     634     CMP D3, D1
+Line 635 ERROR: Illegal symbol
+00000000                           635  000014D6  6E00 003C                635     BGT OUTSIDE_BOUNDS
+Line 636 ERROR: Illegal symbol
+00000000                           636  000014DA  0681 00000078            636     ADD.L   #BUTTON1_WIDTH,   D1
+Line 637 ERROR: Illegal symbol
+00000000                           637  000014E0  B243                     637     CMP D3, D1
+Line 638 ERROR: Illegal symbol
+00000000                           638  000014E2  6D00 0030                638     BLT OUTSIDE_BOUNDS
+Line 639 ERROR: Illegal symbol
+00000000                           639  000014E6                           639      
+Line 640 ERROR: Illegal symbol
+00000000                           640  000014E6                           640      
+Line 641 ERROR: Illegal symbol
+00000000                           641  000014E6                           641      * SET Y BUTTON POSITION
+Line 642 ERROR: Illegal symbol
+00000000                           642  000014E6  2207                     642     MOVE.L D7, D1
+Line 643 ERROR: Illegal symbol
+00000000                           643  000014E8  0681 00000078            643     ADD.L #BUTTON1_POS_Y,   D1
+Line 644 ERROR: Illegal symbol
+00000000                           644  000014EE                           644     
+Line 645 ERROR: Illegal symbol
+00000000                           645  000014EE                           645     * SET Y MOUSE COORDINATES INTO D3
+Line 646 ERROR: Illegal symbol
+00000000                           646  000014EE  2608                     646      MOVE.L A0,D3
+Line 647 ERROR: Illegal symbol
+00000000                           647  000014F0  E08B                     647      LSR.L #8,D3
+Line 648 ERROR: Illegal symbol
+00000000                           648  000014F2  E08B                     648      LSR.L #8,D3
+Line 649 ERROR: Illegal symbol
+00000000                           649  000014F4                           649     
+Line 650 ERROR: Illegal symbol
+00000000                           650  000014F4                           650  
+Line 651 ERROR: Illegal symbol
+00000000                           651  000014F4  B243                     651     CMP D3, D1
+Line 652 ERROR: Illegal symbol
+00000000                           652  000014F6  6E00 001C                652     BGT OUTSIDE_BOUNDS
+Line 653 ERROR: Illegal symbol
+00000000                           653  000014FA  0681 00000050            653     ADD.L   #BUTTON1_HEIGHT,   D1
+Line 654 ERROR: Illegal symbol
+00000000                           654  00001500  B243                     654     CMP D3, D1
+Line 655 ERROR: Illegal symbol
+00000000                           655  00001502  6D00 0010                655     BLT OUTSIDE_BOUNDS
+Line 656 ERROR: Illegal symbol
+00000000                           656  00001506                           656      
+Line 657 ERROR: Illegal symbol
+00000000                           657  00001506  7A01                     657     MOVEQ #1, D5
+Line 658 ERROR: Illegal symbol
+00000000                           658  00001508                           658  
+Line 659 ERROR: Illegal symbol
+00000000                           659  00001508  2009                     659     MOVE.L A1, D0
+Line 660 ERROR: Illegal symbol
+00000000                           660  0000150A  B07C 0001                660     CMP #1, D0
+Line 661 ERROR: Illegal symbol
+00000000                           661  0000150E  6D00 0004                661     BLT OUTSIDE_BOUNDS
+Line 662 ERROR: Illegal symbol
+00000000                           662  00001512  5285                     662     ADD.L #1, D5
+Line 663 ERROR: Illegal symbol
+00000000                           663  00001514                           663    
+Line 664 ERROR: Illegal symbol
+00000000                           664  00001514                           664  
+Line 665 ERROR: Illegal symbol
+00000000                           665  00001514                           665  OUTSIDE_BOUNDS
+Line 666 ERROR: Illegal symbol
+00000000                           666  00001514  4E75                     666     RTS
+Line 667 ERROR: Illegal symbol
+00000000                           667  00001516                           667  
+Line 668 ERROR: Illegal symbol
+00000000                           668  00001516                           668  
+Line 669 ERROR: Illegal symbol
+00000000                           669  00001516                           669  *-------------------------------------------------------------------
+Line 670 ERROR: Illegal symbol
+00000000                           670  00001516                           670  *
+Line 671 ERROR: Illegal symbol
+00000000                           671  00001516                           671  *           TEXT LABELS ON THE BUTTONS
+Line 672 ERROR: Illegal symbol
+00000000                           672  00001516                           672  *
+Line 673 ERROR: Illegal symbol
+00000000                           673  00001516                           673  *-------------------------------------------------------------------
+Line 674 ERROR: Illegal symbol
+00000000                           674  00001516                           674  DRAW_BUTTON_TEXT
+Line 675 ERROR: Illegal symbol
+00000000                           675  00001516  3609                     675              MOVE A1, D3
+Line 676 ERROR: Illegal symbol
+00000000                           676  00001518                           676              
+Line 677 ERROR: Illegal symbol
+00000000                           677  00001518  43F9 0000165C            677              LEA ZERO, A1
+Line 678 ERROR: Illegal symbol
+00000000                           678  0000151E  303C 005F                678              MOVE #95, D0
+Line 679 ERROR: Illegal symbol
+00000000                           679  00001522  323C 0050                679              MOVE #80, D1 ;X
+Line 680 ERROR: Illegal symbol
+00000000                           680  00001526  343C 01C2                680              MOVE #450, D2 ;Y
+Line 681 ERROR: Illegal symbol
+00000000                           681  0000152A  4E4F                     681              TRAP #15
+Line 682 ERROR: Illegal symbol
+00000000                           682  0000152C                           682              
+Line 683 ERROR: Illegal symbol
+00000000                           683  0000152C  43F9 00001660            683              LEA _CLEAR, A1
+Line 684 ERROR: Illegal symbol
+00000000                           684  00001532  303C 005F                684              MOVE #95, D0
+Line 685 ERROR: Illegal symbol
+00000000                           685  00001536  323C 00E6                685              MOVE #230, D1 ;X
+Line 686 ERROR: Illegal symbol
+00000000                           686  0000153A  343C 01C2                686              MOVE #450, D2 ;Y
+Line 687 ERROR: Illegal symbol
+00000000                           687  0000153E  4E4F                     687              TRAP #15
+Line 688 ERROR: Illegal symbol
+00000000                           688  00001540                           688              
+Line 689 ERROR: Illegal symbol
+00000000                           689  00001540  43F9 00001665            689              LEA _EQUAL, A1
+Line 690 ERROR: Illegal symbol
+00000000                           690  00001546  303C 005F                690              MOVE #95, D0
+Line 691 ERROR: Illegal symbol
+00000000                           691  0000154A  323C 0186                691              MOVE #390, D1 ; X
+Line 692 ERROR: Illegal symbol
+00000000                           692  0000154E  343C 01C2                692              MOVE #450, D2 ; Y
+Line 693 ERROR: Illegal symbol
+00000000                           693  00001552  4E4F                     693              TRAP #15
+Line 694 ERROR: Illegal symbol
+00000000                           694  00001554                           694              
+Line 695 ERROR: Illegal symbol
+00000000                           695  00001554  43F9 00001669            695              LEA DIVIDE, A1
+Line 696 ERROR: Illegal symbol
+00000000                           696  0000155A  303C 005F                696              MOVE #95, D0
+Line 697 ERROR: Illegal symbol
+00000000                           697  0000155E  323C 0226                697              MOVE #550, D1 ; X
+Line 698 ERROR: Illegal symbol
+00000000                           698  00001562  343C 01C2                698              MOVE #450, D2 ; Y
+Line 699 ERROR: Illegal symbol
+00000000                           699  00001566  4E4F                     699              TRAP #15
+Line 700 ERROR: Illegal symbol
+00000000                           700  00001568                           700              
+Line 701 ERROR: Illegal symbol
+00000000                           701  00001568  43F9 0000166D            701              LEA ONE, A1
+Line 702 ERROR: Illegal symbol
+00000000                           702  0000156E  303C 005F                702              MOVE #95, D0
+Line 703 ERROR: Illegal symbol
+00000000                           703  00001572  323C 0050                703              MOVE #80, D1 ; X
+Line 704 ERROR: Illegal symbol
+00000000                           704  00001576  343C 015E                704              MOVE #350, D2 ; Y
+Line 705 ERROR: Illegal symbol
+00000000                           705  0000157A  4E4F                     705              TRAP #15
+Line 706 ERROR: Illegal symbol
+00000000                           706  0000157C                           706              
+Line 707 ERROR: Illegal symbol
+00000000                           707  0000157C  43F9 00001671            707              LEA TWO, A1
+Line 708 ERROR: Illegal symbol
+00000000                           708  00001582  303C 005F                708              MOVE #95, D0
+Line 709 ERROR: Illegal symbol
+00000000                           709  00001586  323C 00E6                709              MOVE #230, D1 ; X
+Line 710 ERROR: Illegal symbol
+00000000                           710  0000158A  343C 015E                710              MOVE #350, D2 ; Y
+Line 711 ERROR: Illegal symbol
+00000000                           711  0000158E  4E4F                     711              TRAP #15
+Line 712 ERROR: Illegal symbol
+00000000                           712  00001590                           712              
+Line 713 ERROR: Illegal symbol
+00000000                           713  00001590  43F9 00001675            713              LEA THREE, A1
+Line 714 ERROR: Illegal symbol
+00000000                           714  00001596  303C 005F                714              MOVE #95, D0
+Line 715 ERROR: Illegal symbol
+00000000                           715  0000159A  323C 0186                715              MOVE #390, D1 ;X
+Line 716 ERROR: Illegal symbol
+00000000                           716  0000159E  343C 015E                716              MOVE #350, D2 ;Y
+Line 717 ERROR: Illegal symbol
+00000000                           717  000015A2  4E4F                     717              TRAP #15
+Line 718 ERROR: Illegal symbol
+00000000                           718  000015A4                           718              
+Line 719 ERROR: Illegal symbol
+00000000                           719  000015A4  43F9 00001679            719              LEA SUBTRACT, A1
+Line 720 ERROR: Illegal symbol
+00000000                           720  000015AA  303C 005F                720              MOVE #95, D0
+Line 721 ERROR: Illegal symbol
+00000000                           721  000015AE  323C 0226                721              MOVE #550, D1 ;X
+Line 722 ERROR: Illegal symbol
+00000000                           722  000015B2  343C 015E                722              MOVE #350, D2 ;Y
+Line 723 ERROR: Illegal symbol
+00000000                           723  000015B6  4E4F                     723              TRAP #15
+Line 724 ERROR: Illegal symbol
+00000000                           724  000015B8                           724              
+Line 725 ERROR: Illegal symbol
+00000000                           725  000015B8  43F9 0000167D            725              LEA FOUR, A1
+Line 726 ERROR: Illegal symbol
+00000000                           726  000015BE  303C 005F                726              MOVE #95, D0
+Line 727 ERROR: Illegal symbol
+00000000                           727  000015C2  323C 0050                727              MOVE #80, D1 ; X
+Line 728 ERROR: Illegal symbol
+00000000                           728  000015C6  343C 00FA                728              MOVE #250, D2 ; Y
+Line 729 ERROR: Illegal symbol
+00000000                           729  000015CA  4E4F                     729              TRAP #15
+Line 730 ERROR: Illegal symbol
+00000000                           730  000015CC                           730              
+Line 731 ERROR: Illegal symbol
+00000000                           731  000015CC  43F9 00001681            731              LEA FIVE, A1
+Line 732 ERROR: Illegal symbol
+00000000                           732  000015D2  303C 005F                732              MOVE #95, D0
+Line 733 ERROR: Illegal symbol
+00000000                           733  000015D6  323C 00E6                733              MOVE #230, D1 ; X
+Line 734 ERROR: Illegal symbol
+00000000                           734  000015DA  343C 00FA                734              MOVE #250, D2 ; Y
+Line 735 ERROR: Illegal symbol
+00000000                           735  000015DE  4E4F                     735              TRAP #15
+Line 736 ERROR: Illegal symbol
+00000000                           736  000015E0                           736              
+Line 737 ERROR: Illegal symbol
+00000000                           737  000015E0  43F9 00001685            737              LEA SIX, A1
+Line 738 ERROR: Illegal symbol
+00000000                           738  000015E6  303C 005F                738              MOVE #95, D0
+Line 739 ERROR: Illegal symbol
+00000000                           739  000015EA  323C 0186                739              MOVE #390, D1 ;X
+Line 740 ERROR: Illegal symbol
+00000000                           740  000015EE  343C 00FA                740              MOVE #250, D2 ;Y
+Line 741 ERROR: Illegal symbol
+00000000                           741  000015F2  4E4F                     741              TRAP #15
+Line 742 ERROR: Illegal symbol
+00000000                           742  000015F4                           742              
+Line 743 ERROR: Illegal symbol
+00000000                           743  000015F4  43F9 00001689            743              LEA ADDITION, A1
+Line 744 ERROR: Illegal symbol
+00000000                           744  000015FA  303C 005F                744              MOVE #95, D0
+Line 745 ERROR: Illegal symbol
+00000000                           745  000015FE  323C 0226                745              MOVE #550, D1 ;X
+Line 746 ERROR: Illegal symbol
+00000000                           746  00001602  343C 00FA                746              MOVE #250, D2 ;Y
+Line 747 ERROR: Illegal symbol
+00000000                           747  00001606  4E4F                     747              TRAP #15
+Line 748 ERROR: Illegal symbol
+00000000                           748  00001608                           748              
+Line 749 ERROR: Illegal symbol
+00000000                           749  00001608  43F9 0000168D            749              LEA SEVEN, A1
+Line 750 ERROR: Illegal symbol
+00000000                           750  0000160E  303C 005F                750              MOVE #95, D0
+Line 751 ERROR: Illegal symbol
+00000000                           751  00001612  323C 0050                751              MOVE #80, D1 ; X
+Line 752 ERROR: Illegal symbol
+00000000                           752  00001616  343C 0096                752              MOVE #150, D2 ; Y
+Line 753 ERROR: Illegal symbol
+00000000                           753  0000161A  4E4F                     753              TRAP #15
+Line 754 ERROR: Illegal symbol
+00000000                           754  0000161C                           754              
+Line 755 ERROR: Illegal symbol
+00000000                           755  0000161C  43F9 00001691            755              LEA EIGHT, A1
+Line 756 ERROR: Illegal symbol
+00000000                           756  00001622  303C 005F                756              MOVE #95, D0
+Line 757 ERROR: Illegal symbol
+00000000                           757  00001626  323C 00E6                757              MOVE #230, D1 ; X
+Line 758 ERROR: Illegal symbol
+00000000                           758  0000162A  343C 0096                758              MOVE #150, D2 ; Y
+Line 759 ERROR: Illegal symbol
+00000000                           759  0000162E  4E4F                     759              TRAP #15
+Line 760 ERROR: Illegal symbol
+00000000                           760  00001630                           760              
+Line 761 ERROR: Illegal symbol
+00000000                           761  00001630  43F9 00001695            761              LEA NINE, A1
+Line 762 ERROR: Illegal symbol
+00000000                           762  00001636  303C 005F                762              MOVE #95, D0
+Line 763 ERROR: Illegal symbol
+00000000                           763  0000163A  323C 0186                763              MOVE #390, D1 ;X
+Line 764 ERROR: Illegal symbol
+00000000                           764  0000163E  343C 0096                764              MOVE #150, D2 ;Y
+Line 765 ERROR: Illegal symbol
+00000000                           765  00001642  4E4F                     765              TRAP #15
+Line 766 ERROR: Illegal symbol
+00000000                           766  00001644                           766              
+Line 767 ERROR: Illegal symbol
+00000000                           767  00001644  43F9 00001699            767              LEA MULTIPLY, A1
+Line 768 ERROR: Illegal symbol
+00000000                           768  0000164A  303C 005F                768              MOVE #95, D0
+Line 769 ERROR: Illegal symbol
+00000000                           769  0000164E  323C 0226                769              MOVE #550, D1 ;X
+Line 770 ERROR: Illegal symbol
+00000000                           770  00001652  343C 0096                770              MOVE #150, D2 ;Y
+Line 771 ERROR: Illegal symbol
+00000000                           771  00001656  4E4F                     771              TRAP #15
+Line 772 ERROR: Illegal symbol
+00000000                           772  00001658                           772              
+Line 773 ERROR: Illegal symbol
+00000000                           773  00001658  3243                     773              MOVE D3, A1
+Line 774 ERROR: Illegal symbol
+00000000                           774  0000165A  4E75                     774              RTS
+Line 775 ERROR: Illegal symbol
+00000000                           775  0000165C                           775  
+Line 776 ERROR: Illegal symbol
+00000000                           776  0000165C                           776  
+Line 777 ERROR: Illegal symbol
+00000000                           777  0000165C                           777  SIMHALT             ; halt simulator
+Line 778 ERROR: Illegal symbol
+00000000                           778  0000165C                           778  
+Line 779 ERROR: Illegal symbol
+00000000                           779  0000165C                           779  
+Line 780 ERROR: Illegal symbol
+00000000                           780  0000165C                           780  * Put variables and constants here
+Line 781 ERROR: Illegal symbol
+00000000                           781  0000165C                           781  
+Line 782 ERROR: Illegal symbol
+00000000                           782  0000165C  =00000051                782  FILL_BOX EQU  81 ; SET PEN TO FILL
+Line 783 ERROR: Illegal symbol
+00000000                           783  0000165C  =00000050                783  NORMAL_PEN EQU  80 ; SET PEN TO NORMAL
+Line 784 ERROR: Illegal symbol
+00000000                           784  0000165C  =00000057                784  PEN_DRAW EQU  87 ; DRAW QUEUED PEN
+Line 785 ERROR: Illegal symbol
+00000000                           785  0000165C                           785   
+Line 786 ERROR: Illegal symbol
+00000000                           786  0000165C  =00000014                786  OUTPUT_POS_X EQU 20
+Line 787 ERROR: Illegal symbol
+00000000                           787  0000165C  =00000014                787  OUTPUT_POS_Y EQU 20
+Line 788 ERROR: Illegal symbol
+00000000                           788  0000165C  =00000258                788  OUTPUT_WIDTH EQU 600
+Line 789 ERROR: Illegal symbol
+00000000                           789  0000165C  =00000050                789  OUTPUT_HEIGHT EQU 80
+Line 790 ERROR: Illegal symbol
+00000000                           790  0000165C                           790  
+Line 791 ERROR: Illegal symbol
+00000000                           791  0000165C  =00000014                791  BUTTON1_POS_X EQU 20
+Line 792 ERROR: Illegal symbol
+00000000                           792  0000165C  =00000078                792  BUTTON1_POS_Y EQU 120
+Line 793 ERROR: Illegal symbol
+00000000                           793  0000165C  =00000078                793  BUTTON1_WIDTH EQU 120
+Line 794 ERROR: Illegal symbol
+00000000                           794  0000165C  =00000050                794  BUTTON1_HEIGHT EQU 80
+Line 795 ERROR: Illegal symbol
+00000000                           795  0000165C                           795  
+Line 796 ERROR: Illegal symbol
+00000000                           796  0000165C  =000000A0                796  BUTTON2_POS_X EQU 160
+Line 797 ERROR: Illegal symbol
+00000000                           797  0000165C  =00000078                797  BUTTON2_POS_Y EQU 120
+Line 798 ERROR: Illegal symbol
+00000000                           798  0000165C  =00000078                798  BUTTON2_WIDTH EQU 120
+Line 799 ERROR: Illegal symbol
+00000000                           799  0000165C  =00000050                799  BUTTON2_HEIGHT EQU 80
+Line 800 ERROR: Illegal symbol
+00000000                           800  0000165C                           800  
+Line 801 ERROR: Illegal symbol
+00000000                           801  0000165C  =0000000D                801  CR  EQU  $0D
+Line 802 ERROR: Illegal symbol
+00000000                           802  0000165C  =00000009                802  HT  EQU  $09
+Line 803 ERROR: Illegal symbol
+00000000                           803  0000165C  =0000000A                803  LF  EQU  $0A
+Line 804 ERROR: Illegal symbol
+00000000                           804  0000165C= 30 0D 0A 00              804  ZERO DC.B '0',CR,LF,0
+Line 805 ERROR: Illegal symbol
+00000000                           805  00001660= 43 45 0D 0A 00           805  _CLEAR DC.B 'CE',CR,LF,0
+Line 806 ERROR: Illegal symbol
+00000000                           806  00001665= 3D 0D 0A 00              806  _EQUAL DC.B '=',CR,LF,0
+Line 807 ERROR: Illegal symbol
+00000000                           807  00001669= 2F 0D 0A 00              807  DIVIDE DC.B '/',CR,LF,0
+Line 808 ERROR: Illegal symbol
+00000000                           808  0000166D= 31 0D 0A 00              808  ONE DC.B '1',CR,LF,0
+Line 809 ERROR: Illegal symbol
+00000000                           809  00001671= 32 0D 0A 00              809  TWO DC.B '2',CR,LF,0
+Line 810 ERROR: Illegal symbol
+00000000                           810  00001675= 33 0D 0A 00              810  THREE DC.B '3',CR,LF,0
+Line 811 ERROR: Illegal symbol
+00000000                           811  00001679= 2D 0D 0A 00              811  SUBTRACT DC.B '-',CR,LF,0
+Line 812 ERROR: Illegal symbol
+00000000                           812  0000167D= 34 0D 0A 00              812  FOUR DC.B '4',CR,LF,0
+Line 813 ERROR: Illegal symbol
+00000000                           813  00001681= 35 0D 0A 00              813  FIVE DC.B '5',CR,LF,0
+Line 814 ERROR: Illegal symbol
+00000000                           814  00001685= 36 0D 0A 00              814  SIX DC.B '6',CR,LF,0
+Line 815 ERROR: Illegal symbol
+00000000                           815  00001689= 2B 0D 0A 00              815  ADDITION DC.B '+',CR,LF,0
+Line 816 ERROR: Illegal symbol
+00000000                           816  0000168D= 37 0D 0A 00              816  SEVEN DC.B '7',CR,LF,0
+Line 817 ERROR: Illegal symbol
+00000000                           817  00001691= 38 0D 0A 00              817  EIGHT DC.B '8',CR,LF,0
+Line 818 ERROR: Illegal symbol
+00000000                           818  00001695= 39 0D 0A 00              818  NINE DC.B '9',CR,LF,0
+Line 819 ERROR: Illegal symbol
+00000000                           819  00001699= 78 0D 0A 00              819  MULTIPLY DC.B 'x',CR,LF,0
+Line 820 ERROR: Illegal symbol
+00000000                           820  0000169D= 0D 0A 0D 0A 0D 0A ...    820  ANSWER DC.B CR,LF,CR,LF,CR,LF,HT,'ANSWER',0
+Line 821 ERROR: Illegal symbol
+00000000                           821  000016AB  =00FFFFFF                821  WHITE           EQU     $00FFFFFF ; A B G R (LEAST SIGNIFICANT)
+Line 822 ERROR: Illegal symbol
+00000000                           822  000016AB  =00FF0000                822  BLUE           EQU     $00FF0000 ; A B G R (LEAST SIGNIFICANT)
+Line 823 ERROR: Illegal symbol
+00000000                           823  000016AB  =0000FFFF                823  YELLOW           EQU     $0000FFFF ; A B G R (LEAST SIGNIFICANT)
+Line 824 ERROR: Illegal symbol
+00000000                           824  000016AB  =000000FF                824  RED             EQU     $000000FF ; A B G R (LEAST SIGNIFICANT)
+Line 825 ERROR: Illegal symbol
+00000000                           825  000016AB                           825  
+Line 826 ERROR: Illegal symbol
+00000000                           826  000016AB                           826  
+Line 827 ERROR: Illegal symbol
+00000000                           827  000016AB                           827       END    START        ; last line of source
+00000000                           828  
+Line 829 ERROR: Invalid opcode
+00000000                           829  No errors detected
+Line 830 ERROR: Invalid opcode
+00000000                           830  No warnings generated
+00000000                           831  
+00000000                           832  
+Line 833 ERROR: Invalid opcode
+00000000                           833  SYMBOL TABLE INFORMATION
+Line 834 ERROR: Invalid opcode
+00000000                           834  Symbol-name         Value
+Line 835 ERROR: Illegal symbol
+00000000                           835  -------------------------
+Line 836 ERROR: Invalid opcode
+00000000                           836  ADDITION            1689
+Line 837 ERROR: Invalid opcode
+00000000                           837  ANSWER              169D
+Line 838 ERROR: Invalid opcode
+00000000                           838  BLUE                FF0000
+Line 839 ERROR: Invalid opcode
+00000000                           839  BUTTON1_HEIGHT      50
+Line 840 ERROR: Invalid opcode
+00000000                           840  BUTTON1_POS_X       14
+Line 841 ERROR: Invalid opcode
+00000000                           841  BUTTON1_POS_Y       78
+Line 842 ERROR: Invalid opcode
+00000000                           842  BUTTON1_WIDTH       78
+Line 843 ERROR: Invalid opcode
+00000000                           843  BUTTON2_HEIGHT      50
+Line 844 ERROR: Invalid opcode
+00000000                           844  BUTTON2_POS_X       A0
+Line 845 ERROR: Invalid opcode
+00000000                           845  BUTTON2_POS_Y       78
+Line 846 ERROR: Invalid opcode
+00000000                           846  BUTTON2_WIDTH       78
+Line 847 ERROR: Invalid opcode
+00000000                           847  CHECK_MOUSE         14C4
+Line 848 ERROR: Invalid opcode
+00000000                           848  CONTINUE1           1352
+Line 849 ERROR: Invalid opcode
+00000000                           849  CONTINUE10          13D2
+Line 850 ERROR: Invalid opcode
+00000000                           850  CONTINUE11          12B2
+Line 851 ERROR: Invalid opcode
+00000000                           851  CONTINUE12          1332
+Line 852 ERROR: Invalid opcode
+00000000                           852  CONTINUE13          13B2
+Line 853 ERROR: Invalid opcode
+00000000                           853  CONTINUE14          13F2
+Line 854 ERROR: Invalid opcode
+00000000                           854  CONTINUE15          1412
+Line 855 ERROR: Invalid opcode
+00000000                           855  CONTINUE16          1432
+Line 856 ERROR: Invalid opcode
+00000000                           856  CONTINUE2           1372
+Line 857 ERROR: Invalid opcode
+00000000                           857  CONTINUE3           1392
+Line 858 ERROR: Invalid opcode
+00000000                           858  CONTINUE4           12D2
+Line 859 ERROR: Invalid opcode
+00000000                           859  CONTINUE5           12F2
+Line 860 ERROR: Invalid opcode
+00000000                           860  CONTINUE6           1312
+Line 861 ERROR: Invalid opcode
+00000000                           861  CONTINUE7           1252
+Line 862 ERROR: Invalid opcode
+00000000                           862  CONTINUE8           1272
+Line 863 ERROR: Invalid opcode
+00000000                           863  CONTINUE9           1292
+Line 864 ERROR: Invalid opcode
+00000000                           864  CR                  D
+Line 865 ERROR: Invalid opcode
+00000000                           865  DIVIDE              1669
+Line 866 ERROR: Invalid opcode
+00000000                           866  DRAW_BUTTON         1474
+Line 867 ERROR: Invalid opcode
+00000000                           867  DRAW_BUTTON_TEXT    1516
+Line 868 ERROR: Invalid opcode
+00000000                           868  DRAW_OUTPUT_FIELD   143C
+Line 869 ERROR: Invalid opcode
+00000000                           869  EIGHT               1691
+Line 870 ERROR: Invalid opcode
+00000000                           870  FILL_BOX            51
+Line 871 ERROR: Invalid opcode
+00000000                           871  FIVE                1681
+Line 872 ERROR: Invalid opcode
+00000000                           872  FOUR                167D
+Line 873 ERROR: Invalid opcode
+00000000                           873  GAME_LOOP           1012
+Line 874 ERROR: Invalid opcode
+00000000                           874  GET_MOUSE           11E2
+Line 875 ERROR: Invalid opcode
+00000000                           875  HANDLE_CLICK        1030
+Line 876 ERROR: Invalid opcode
+00000000                           876  HT                  9
+Line 877 ERROR: Invalid opcode
+00000000                           877  LF                  A
+Line 878 ERROR: Invalid opcode
+00000000                           878  MULTIPLY            1699
+Line 879 ERROR: Invalid opcode
+00000000                           879  NINE                1695
+Line 880 ERROR: Invalid opcode
+00000000                           880  NORMAL_PEN          50
+Line 881 ERROR: Invalid opcode
+00000000                           881  NOT_0               114A
+Line 882 ERROR: Invalid opcode
+00000000                           882  NOT_1               104E
+Line 883 ERROR: Invalid opcode
+00000000                           883  NOT_11              1156
+Line 884 ERROR: Invalid opcode
+00000000                           884  NOT_12              1162
+Line 885 ERROR: Invalid opcode
+00000000                           885  NOT_13              116E
+Line 886 ERROR: Invalid opcode
+00000000                           886  NOT_14              1186
+Line 887 ERROR: Invalid opcode
+00000000                           887  NOT_15              11D4
+Line 888 ERROR: Invalid opcode
+00000000                           888  NOT_16              11E0
+Line 889 ERROR: Invalid opcode
+00000000                           889  NOT_2               106A
+Line 890 ERROR: Invalid opcode
+00000000                           890  NOT_3               1086
+Line 891 ERROR: Invalid opcode
+00000000                           891  NOT_4               10A2
+Line 892 ERROR: Invalid opcode
+00000000                           892  NOT_5               10BE
+Line 893 ERROR: Invalid opcode
+00000000                           893  NOT_6               10DA
+Line 894 ERROR: Invalid opcode
+00000000                           894  NOT_7               10F6
+Line 895 ERROR: Invalid opcode
+00000000                           895  NOT_8               1112
+Line 896 ERROR: Invalid opcode
+00000000                           896  NOT_9               112E
+Line 897 ERROR: Invalid opcode
+00000000                           897  NOT_ADDITION        11B4
+Line 898 ERROR: Invalid opcode
+00000000                           898  NOT_BLUE            1496
+Line 899 ERROR: Invalid opcode
+00000000                           899  NOT_DIVISION        11D4
+Line 900 ERROR: Invalid opcode
+00000000                           900  NOT_MULTIPLY        11A4
+Line 901 ERROR: Invalid opcode
+00000000                           901  NOT_SUBTRACTION     11C4
+Line 902 ERROR: Invalid opcode
+00000000                           902  NOT_YELLOW          1488
+Line 903 ERROR: Invalid opcode
+00000000                           903  NO_CLICK            102E
+Line 904 ERROR: Invalid opcode
+00000000                           904  NO_OP_0             1146
+Line 905 ERROR: Invalid opcode
+00000000                           905  NO_OP_1             104A
+Line 906 ERROR: Invalid opcode
+00000000                           906  NO_OP_2             1066
+Line 907 ERROR: Invalid opcode
+00000000                           907  NO_OP_3             1082
+Line 908 ERROR: Invalid opcode
+00000000                           908  NO_OP_4             109E
+Line 909 ERROR: Invalid opcode
+00000000                           909  NO_OP_5             10BA
+Line 910 ERROR: Invalid opcode
+00000000                           910  NO_OP_6             10D6
+Line 911 ERROR: Invalid opcode
+00000000                           911  NO_OP_7             10F2
+Line 912 ERROR: Invalid opcode
+00000000                           912  NO_OP_8             110E
+Line 913 ERROR: Invalid opcode
+00000000                           913  NO_OP_9             112A
+Line 914 ERROR: Invalid opcode
+00000000                           914  ONE                 166D
+Line 915 ERROR: Invalid opcode
+00000000                           915  OUTPUT_HEIGHT       50
+Line 916 ERROR: Invalid opcode
+00000000                           916  OUTPUT_POS_X        14
+Line 917 ERROR: Invalid opcode
+00000000                           917  OUTPUT_POS_Y        14
+Line 918 ERROR: Invalid opcode
+00000000                           918  OUTPUT_WIDTH        258
+Line 919 ERROR: Invalid opcode
+00000000                           919  OUTSIDE_BOUNDS      1514
+Line 920 ERROR: Invalid opcode
+00000000                           920  PEN_DRAW            57
+Line 921 ERROR: Invalid opcode
+00000000                           921  RED                 FF
+Line 922 ERROR: Invalid opcode
+00000000                           922  RENDER              1204
+Line 923 ERROR: Invalid opcode
+00000000                           923  SEVEN               168D
+Line 924 ERROR: Invalid opcode
+00000000                           924  SIMHALT             165C
+Line 925 ERROR: Invalid opcode
+00000000                           925  SIX                 1685
+Line 926 ERROR: Invalid opcode
+00000000                           926  START               1000
+Line 927 ERROR: Invalid opcode
+00000000                           927  SUBTRACT            1679
+Line 928 ERROR: Invalid opcode
+00000000                           928  THREE               1675
+Line 929 ERROR: Invalid opcode
+00000000                           929  TWO                 1671
+Line 930 ERROR: Invalid opcode
+00000000                           930  UPDATE              101C
+Line 931 ERROR: Invalid opcode
+00000000                           931  WHITE               FFFFFF
+Line 932 ERROR: Invalid opcode
+00000000                           932  YELLOW              FFFF
+Line 933 ERROR: Invalid opcode
+00000000                           933  ZERO                165C
+Line 934 ERROR: Invalid opcode
+00000000                           934  _CLEAR              1660
+Line 935 ERROR: Invalid opcode
+00000000                           935  _EQUAL              1665
+Line 936 WARNING: END directive missing, starting address not set
+
+932 errors detected
+1 warning generated
+
+
+SYMBOL TABLE INFORMATION
+Symbol-name         Value
+-------------------------
