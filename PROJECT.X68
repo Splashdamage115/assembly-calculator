@@ -246,14 +246,19 @@ NOT_15
             * CLICKED DIVISION IN BUTTONS
             MOVE #4, A4
 NOT_16
-            MOVE.L #0000,D1
-            MOVE.B #11,D0
-            TRAP #15
-            
-            MOVE A6, D1
-            MOVE.B #6, D3
-            MOVE.B #20, D0
-            TRAP #15
+*            MOVE.L #0000,D1
+*            MOVE.B #11,D0
+*            TRAP #15
+*            
+*            MOVE #0003, D1
+**            MOVE.L #128255, D2
+*            MOVE.B #11, D0
+*            TRAP #15
+*            
+*            MOVE A6, D1
+*            MOVE.B #6, D3
+*            MOVE.B #20, D0
+*            TRAP #15
             
 *            MOVE A4, D1
 *            MOVE.B #20, D3
@@ -322,6 +327,20 @@ RENDER
     
     BSR DRAW_OUTPUT_FIELD
     
+    MOVE.L #0000,D1
+            MOVE.B #11,D0
+            TRAP #15
+            
+    
+    MOVE A1, D1
+    LEA ANSWER, A1
+    MOVE.B #14, D0
+    TRAP #15
+    MOVE D1, A1
+    MOVE A6, D1
+    MOVE.B #6, D3
+    MOVE.B #20, D0
+    TRAP #15
     
     MOVE #0, A2
     
@@ -780,6 +799,7 @@ BUTTON2_WIDTH EQU 120
 BUTTON2_HEIGHT EQU 80
 
 CR  EQU  $0D
+HT  EQU  $09
 LF  EQU  $0A
 ZERO DC.B '0',CR,LF,0
 _CLEAR DC.B 'CE',CR,LF,0
@@ -797,6 +817,7 @@ SEVEN DC.B '7',CR,LF,0
 EIGHT DC.B '8',CR,LF,0
 NINE DC.B '9',CR,LF,0
 MULTIPLY DC.B 'x',CR,LF,0
+ANSWER DC.B CR,LF,CR,LF,CR,LF,HT,'ANSWER',0
 WHITE           EQU     $00FFFFFF ; A B G R (LEAST SIGNIFICANT)
 BLUE           EQU     $00FF0000 ; A B G R (LEAST SIGNIFICANT)
 YELLOW           EQU     $0000FFFF ; A B G R (LEAST SIGNIFICANT)
@@ -804,6 +825,7 @@ RED             EQU     $000000FF ; A B G R (LEAST SIGNIFICANT)
 
 
      END    START        ; last line of source
+
 
 
 
